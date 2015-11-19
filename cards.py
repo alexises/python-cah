@@ -25,6 +25,34 @@ class CardStack(object):
              self._shuffle()
          return self.stack[self.availableCards.pop()]
 
+     def __len__(self):
+         return len(self.stack)
+
+class MultiStack(CardStack):
+     def __init__(self):
+         super(MultiStack, self).__init__()
+
+     def _shuffle(self):
+         self.availableCards = []
+         index=0
+         for i in self.stack:
+             self.availableCards.extend([index] * len(i))
+         shuffle(self.availableCards)
+
+     def addFiles(self, files, DeckClass):
+         ''' add multiple files to a MultiStack
+         :param files list of filename to add
+         :param DeckClass base clase used to parse file
+
+         DeckClass should have a pick method that return a card
+         DeckClass should take the filename under the construtor
+         '''
+         for i in files:
+             self.stack.append(DeckClass(i))
+
+     def pick(self):
+         return super(MultiStack, self).pick().pick()
+         
 class BlackCard(object):
      def __init__(self, value, pick):
          self.value = value
