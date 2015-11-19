@@ -1,0 +1,1682 @@
+[
+  {
+    "type": "Question",
+    "value": "\"Watson!\" Holmes exclaimed, \"This man was obviously killed by {}!\"",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "{} ain't nothin' to fuck with.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "{} gives a whole new meaning to {}.",
+    "keep": "Yes",
+    "draw": 1,
+    "pick": 2,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "{}: good to the last drop.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "{} in the front seat; {} in the back seat; gotta make my mind up, which seat do I take?",
+    "keep": "Yes",
+    "draw": 1,
+    "pick": 2,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "{} in the morning, sailors take warning.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "{} is a classic case of {}.",
+    "keep": "Yes",
+    "draw": 1,
+    "pick": 2,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "{} is a gateway to {}.",
+    "keep": "Yes",
+    "draw": 1,
+    "pick": 2,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "{} is a time-saving godsend for busy housewives.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "{} is best enjoyed on the first date.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "{} is dead to me.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "{} is nothing {} can't fix.",
+    "keep": "Yes",
+    "draw": 1,
+    "pick": 2,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "{} is now outsourced to call centers in India.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "{} is the name of my new indie black metal emo jazz post-dubstep funk band.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "{} is the new black.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "{} is the root of all evil.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "{} isn't about sex, it's about power.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "{} means never having to say you're sorry.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "{} R Us.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "{}, for the win!",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "{}, fun for the whole family!",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "{}. Because, fuck you, that's why.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "{}. I'd hit that.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "{}. It's everywhere you want to be.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "{}. The Care Bear Stare",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "{}. The Final Frontier.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "{}. The Nicolas Cage Story",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "{}: The Other White Meat.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "9 out of 10 doctors agree, {} twice a day prevents cancer.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "A fortune teller told me I will live a life filled with {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "A hot new alternative medical practice involves placing {} in {}.",
+    "keep": "Yes",
+    "draw": 1,
+    "pick": 2,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "A little-known fact is that Microsoft Windows was originally slated to be the first operating system to include {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "A little-known provision of Obamacare allows {} access to {}.",
+    "keep": "Yes",
+    "draw": 1,
+    "pick": 2,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "According to an old Romanian superstition, {} will happen if you don't {} before going to bed.",
+    "keep": "Yes",
+    "draw": 1,
+    "pick": 2,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "All the cool kids are doing it.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "An international tribunal has found {} guilty of {}.",
+    "keep": "Yes",
+    "draw": 1,
+    "pick": 2,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "And on his farm he had {}, e-i-e-i-o!",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "And then little Billy woke up the next morning, he discovered that the tooth fairy had left {} under his pillow.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Apple has revealed they now have a patent for {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Ask your doctor if {} is right for you.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Back in my day, {} only cost a nickel.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Bang {} Marry {} Kill {}.",
+    "keep": "Yes",
+    "draw": 2,
+    "pick": 3,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Choosy moms choose {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Cirque de Soleil presents MYSTIQUEE, a night of daring acrobatics, whimsy and {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Daddy drinks because of {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Damn it feels good to be {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Danger! {} ahead!",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Dear Sir or Madam, We regret to inform you that the Office of {} has denied your request for {}.",
+    "keep": "Yes",
+    "draw": 1,
+    "pick": 2,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Disney presents {} on ice!",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Disney's newest Pixar movie will be about {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "For campaign funding reform to really be effective, there needs to be a specific policy about {} contributions.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "The Westboro Baptist Church have just announced that they plan to start picketing the funerals of {} too.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Genius is 10% inspiration and 90% {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Give me liberty, or give me {}!",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Go-go Gadget {}!",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Groundbreaking research provides convincing evidence that {} killed the dinosaurs.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Happiness is {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Hey Rocky, watch me pull {} out of my {}!",
+    "keep": "Yes",
+    "draw": 1,
+    "pick": 2,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "How did this {} get into my {}?",
+    "keep": "Yes",
+    "draw": 1,
+    "pick": 2,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "I always call in sick to work when I have a bad case of {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "I always think of {} when I fall asleep.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "I can drive and {} at the same time.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "I can handle public displays of affection, but {} is really too much.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "I can't get no {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "I feel the need - the need for {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "I firmly believe that for the economy to recover, the Department of {} needs to change its policies on {}.",
+    "keep": "Yes",
+    "draw": 1,
+    "pick": 2,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "I for one welcome our new {} overlords!",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "I got a fever and the only cure is more {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "I have decided to commit to a life of studious contemplation on {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "I like my women like {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "I like to keep {} as a souvenir of my sexual encounters.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "I live my life according to the teachings of {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "I love {} in my {}.",
+    "keep": "Yes",
+    "draw": 1,
+    "pick": 2,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "I love the smell of {} in the morning.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "I met my current significant other at {},",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "I might be a {}, but at least I'm no {}.",
+    "keep": "Yes",
+    "draw": 1,
+    "pick": 2,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "I really hate {} at work. So I take care of it with {}.",
+    "keep": "Yes",
+    "draw": 1,
+    "pick": 2,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "I sleep like a baby after bathing in a tub full of {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "I was into {} before it was cool.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": " I will not eat {}.  I will not eat them Sam-I-Am.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "I work out so that I can look good when I'm {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "I'd rather be {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "If a pot of gold is on one end of the rainbow, what is on the other?",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "If I don't enjoy {}, then the terrorists win.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "If I weren't so busy with {}, I'd be {}.",
+    "keep": "Yes",
+    "draw": 1,
+    "pick": 2,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "If there's one thing you could change about me it would be {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "In a pinch, {} can be substituted with {}.",
+    "keep": "Yes",
+    "draw": 1,
+    "pick": 2,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "In a surprising turnaround, {} has publicly come out as supporting President Obama.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "In an astonishing and ground-breaking decision, the Supreme Court has decided in favor of {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "In Nintendo's new game, you must fight off wave after wave of {} in order to save {}.",
+    "keep": "Yes",
+    "draw": 1,
+    "pick": 2,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "In the grim darkness of the future there is only {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "In the new tenth circle of Hell, sinners will be condemned to an eternity of {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Instead of her normal self, Cinderella should have turned into {} at midnight.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Instead of Robin, Batman should have had {} as a sidekick.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Instead of the Jews, Hitler should have worried more about {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Iron Chef: Today's secret ingredient is {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "It is often argued that our ancestors would have never evolved without the aid of {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "It rubs {} on its skin or else it gets {} again.",
+    "keep": "Yes",
+    "draw": 1,
+    "pick": 2,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "It sucks when you look in the fridge, and all you have to eat is {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "It was more uncomfortable than {} at a {} convention.",
+    "keep": "Yes",
+    "draw": 1,
+    "pick": 2,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "I've got the fever and the only cure is more {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Keep your friends close, but your {} closer.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Kitten thinks of nothing but {} all day.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Legend of Zelda: The {} of {}.",
+    "keep": "Yes",
+    "draw": 1,
+    "pick": 2,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Like a good neighbor {} is there.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Michael Bay's new three-hour action epic pits {} against {}.",
+    "keep": "Yes",
+    "draw": 1,
+    "pick": 2,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Moral at work was boosted when they put {} in the vending machines.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "My favorite book is the classic tale of {}, written by {}.",
+    "keep": "Yes",
+    "draw": 1,
+    "pick": 2,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "My favorite childhood memory is {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "My favorite TV channel is the one that shows programs about {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "My favourite family recipe is {} and {} with just a dash of {}.",
+    "keep": "Yes",
+    "draw": 2,
+    "pick": 3,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "My Little Pony: Friendship is {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "My mission in life is to create a videogame about {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "My other car is a {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "New car sticker craze: Calvin pissing on {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Next on Oprah, teens addicted to {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Next, on Martha Stewart's Living, spruce up your {} with {}.",
+    "keep": "Yes",
+    "draw": 1,
+    "pick": 2,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Next, on the Twilight Zone: a parallel universe where {} is replaced by {}.",
+    "keep": "Yes",
+    "draw": 1,
+    "pick": 2,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Nothing beats cuddling with {} in bed.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Nothing feels better than {} on {}.",
+    "keep": "Yes",
+    "draw": 1,
+    "pick": 2,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Now witness the firepower of this fully armed and operational {}!",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "On tonight's special report, {}. Fact or fiction?",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "One day a man is bitten by {} and is transformed into {}.",
+    "keep": "Yes",
+    "draw": 1,
+    "pick": 2,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Only {} is worse than a heretic.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Our most powerful weapon on the day of the zombie apocalypse will be {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Remember, {} is never funny. Unless it involves {}.",
+    "keep": "Yes",
+    "draw": 1,
+    "pick": 2,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Roses are red; Violets are {}; {} is {}, and so are you.",
+    "keep": "Yes",
+    "draw": 2,
+    "pick": 3,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Remember kids, just say no to {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Science has discovered that beyond the edges of the universe, there is only {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Scientists have reverse engineered alien technology that unlocks the secrets of {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Something you should regret, but secretly don't.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Sometimes you feel like {}, sometimes you don't.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Sticks and stones may break my bones, but {} will never hurt me.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Stop staring at {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "The best Christmas present my grandma ever gave me was {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "The best things in life come in {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "The clown made all the children laugh with his balloon animal in the shape of {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "The Himalayas are filled with many perils, such as {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "The internet was invented for {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "The Japanese government spent billions of yen researching {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "The local experimental college is now offering a course on {} led by {}.",
+    "keep": "Yes",
+    "draw": 1,
+    "pick": 2,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "The new hip trend at craft bars is vodka infused with {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "The new Nintendo will be called the {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "The new version of Dungeons and Dragons makes {} a playable race.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "The next ice cream flavor from Ben & Jerry's.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "The next Team Fortress 2 update will include {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "The only problem with {} is that there isn't enough {} in it.",
+    "keep": "Yes",
+    "draw": 1,
+    "pick": 2,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "The power of love is useless against {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "The road to success is paved with {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "The sad truth is, at the edge of the universe, there is nothing but {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "The theme for our senior prom will be {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "There is a time for peace, a time for war, and a time for {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "There is nothing worse than seeing {} in the light of day.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "There's no crying in {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "There's no such thing as {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "They found {} in the dumpster behind the abortion clinic.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "This decade will be regarded as the golden age of {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "This Thanksgiving, I'm most thankful for {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "This year's Pulitzer Prize winning novel was chosen for its brilliant {}, as a metaphor for {}.",
+    "keep": "Yes",
+    "draw": 1,
+    "pick": 2,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Try walking a mile in my {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Warning: This product may contain trace amounts of {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "What two things do you need to survive on a deserted island?",
+    "keep": "Yes",
+    "draw": 1,
+    "pick": 2,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "What am I hiding from my parents?",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "What am I lying to my friends about?",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "What brought the orgy to a screeching halt?",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "What did I find in the couch cushions?",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "What do I fear my parents will find in my sock drawer?",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "What do I like best about my job?",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "What do I think about when I'm having trouble getting off?",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "What gave me AIDS?",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "What goes best on toast?",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "What I wouldn't give for 10 minutes alone with {}",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "What in my past led to my current position on gun control laws?",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "What is in my zombie apocalypse survival bag?",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "What is the moral of the story?",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "What is the only way I can achieve orgasm?",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "What keeps me up at night?",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "What makes me tingle all over?",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "What makes the world go round?",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "{} melts in your mouth, not in your hand.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "What time is it? {} time!",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "What was Abraham Lincoln's deep, dark secret?",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "What will be an issue in the next presidential election?",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "What will be our last chance for salvation when our new robot overlords take over?",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "What will be put in the time capsule to preserve humanity's memory?",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "What will I bring to the party?",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "What's my superpower?",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "What's the real reason that I've gathered you all hear today?",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "What's the worst that could happen?",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "When a man and a woman love each other very much, suddenly {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "When I get drunk, I feel that I am an expert on {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "When I get married, our vows will include words about {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "When I saw your mom naked, it reminded me of {}",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "When I'm alone and the room is totally dark, I like to secretly {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "When life gives you {}, make {}.",
+    "keep": "Yes",
+    "draw": 1,
+    "pick": 2,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "When you wake up from a night of heavy drinking, you usually regret {}",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Where do babies come from?",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Who could have guessed that the alien invasion would be easily thwarted by {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Who was my childhood hero?",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Why am I in such a bad mood?",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Why am I like this?",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Why are we wearing tuxedos?",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Why did the {} have to {}?",
+    "keep": "Yes",
+    "draw": 1,
+    "pick": 2,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Why is mom calling?",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Why was my application to work at McDonald's rejected?",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "With the Democrats and Republicans in a dead heat, the election was stolen by the {} party.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "Wonder Twin powers, activate! Shape of {}. Form of {}.",
+    "keep": "Yes",
+    "draw": 1,
+    "pick": 2,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "You can never have too much {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "You know God hates you when {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  },
+  {
+    "type": "Question",
+    "value": "You're in good hands with {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "BGG Suggestions"
+  }
+]

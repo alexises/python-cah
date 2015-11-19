@@ -1,0 +1,114 @@
+[
+  {
+    "type": "Question",
+    "value": "After months of debate, the Occupy Wall Street General Assembly could only agree on \"More {}!\"",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "CaH Official 2nd Expansion"
+  },
+  {
+    "type": "Question",
+    "value": "Before {}, all we had was {}.",
+    "keep": "Yes",
+    "draw": 1,
+    "pick": 2,
+    "source": "CaH Official 2nd Expansion"
+  },
+  {
+    "type": "Question",
+    "value": "Everyone down on the ground! We don't want to hurt anyone. We're just here for {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "CaH Official 2nd Expansion"
+  },
+  {
+    "type": "Question",
+    "value": "I spent my whole life working toward {}, only to have it ruined by {}.",
+    "keep": "Yes",
+    "draw": 1,
+    "pick": 2,
+    "source": "CaH Official 2nd Expansion"
+  },
+  {
+    "type": "Question",
+    "value": "I went from {} to {}, all thanks to {}.",
+    "keep": "Yes",
+    "draw": 2,
+    "pick": 3,
+    "source": "CaH Official 2nd Expansion"
+  },
+  {
+    "type": "Question",
+    "value": "If God didn't want us to enjoy {}, he wouldn't have given us {}.",
+    "keep": "Yes",
+    "draw": 1,
+    "pick": 2,
+    "source": "CaH Official 2nd Expansion"
+  },
+  {
+    "type": "Question",
+    "value": "Little Miss Muffet Sat on a tuffet, Eating her curds and {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "CaH Official 2nd Expansion"
+  },
+  {
+    "type": "Question",
+    "value": "Members of New York's social elite are paying thousands of dollars just to experience {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "CaH Official 2nd Expansion"
+  },
+  {
+    "type": "Question",
+    "value": "My country, 'tis of thee, sweet land of {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "CaH Official 2nd Expansion"
+  },
+  {
+    "type": "Question",
+    "value": "Next time on Dr. Phil: How to talk to your child about {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "CaH Official 2nd Expansion"
+  },
+  {
+    "type": "Question",
+    "value": "Only two things in life are certain: death and {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "CaH Official 2nd Expansion"
+  },
+  {
+    "type": "Question",
+    "value": "The healing process began when I joined a support group for victims of {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "CaH Official 2nd Expansion"
+  },
+  {
+    "type": "Question",
+    "value": "The votes are in, and the new high school mascot is {}.",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "CaH Official 2nd Expansion"
+  },
+  {
+    "type": "Question",
+    "value": "This month's Cosmo: \"Spice up your sex life by bringing {} into the bedroom.\"",
+    "keep": "Yes",
+    "draw": 0,
+    "pick": 1,
+    "source": "CaH Official 2nd Expansion"
+  }
+]
