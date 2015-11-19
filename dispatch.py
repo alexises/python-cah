@@ -1,4 +1,5 @@
 import logging
+import string
 from game import CAHGame
 logger = logging.getLogger(__name__)
 
@@ -9,6 +10,7 @@ class CmdDispatch(object):
           self.party = {}
           self.appendCmd('log', self.logCmd)
           self.appendCmd('start', self.startCmd)
+          self.appendCmd('notice', self.noticeCmd)
 
       def appendCmd(self, cmdName, callback):
           self.cmd[cmdName] = callback
@@ -23,6 +25,10 @@ class CmdDispatch(object):
 
       def logCmd(self, serverData, channel, user, args):
           logger.info('LOG '+ str(args))
+
+      def noticeCmd(self, serverData, channel, user, args):
+          logger.info('NOTICE '+ str(args))
+          serverData.notice(args[0], string.join(args[1:], ' '))
 
       def startCmd(self, serverData, channel, user, args):
           if self.party.has_key(channel):
