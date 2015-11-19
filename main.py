@@ -2,8 +2,9 @@ from ircbot import SingleServerIRCBot
 from config import nick, server, port, chan, ctcp, token
 import logging
 import sys
+from glob import glob
 from datetime import datetime
-from dispatch import CmdDispatch
+from dispatch import BaseGameDispatch
 logger = logging.getLogger(__name__)
 
 
@@ -17,13 +18,13 @@ def printEntry(c, e):
     print '{0} {1} <{2}> {3}'.format(dateTxt, chan, user, msg)
 
 class CahBot(SingleServerIRCBot):
-    def __init__(self, channel, nick, ctcp, server, port=6667, ssl=False, token='!'):
+    def __init__(self, channel, nick, ctcp, server, dispatcher, port=6667, ssl=False, token='!'):
         SingleServerIRCBot.__init__(self, [(server, port)], nick, ctcp)
         self.ctcp = ctcp
         self.channel = channel
         self.ssl = ssl
         self.token = token
-        self.dispatcher = CmdDispatch()
+        self.dispatcher = dispatcher
 
     def _connect(self):
         password = None
@@ -76,7 +77,10 @@ def main():
     logger.debug('server : ' + server)
     logger.debug('port : ' + str(port))
     logger.debug('token : ' + token)
-    bot = CahBot(chan, nick, ctcp, server, port, ssl=True, token=token)
+    BlackCardsFile = glob('./cards/*_q.json')
+    WhiteCardsFile = glob('./cards/*_a.json')
+    dispatch = BaseGameDispatch(BlackCardsFile, WhiteCardsFile)
+    bot = CahBot(chan, nick, ctcp, server, dispatch, port, ssl=True, token=token)
     bot.start()
 
 if __name__ == "__main__":
