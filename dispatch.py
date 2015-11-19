@@ -44,6 +44,6 @@ class BaseGameDispatch(CmdDispatch):
             logger.error('party already running, forbid command')
             return
         logger.info('start a new game under ' +  channel)
-        game = CAHGame(self, channel, serverData)
+        game = CAHGame(self, channel, serverData, self.blackDeck, self.whiteDeck)
         game.start(user)
         self.party[channel] = game

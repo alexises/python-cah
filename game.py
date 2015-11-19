@@ -5,14 +5,29 @@ logger = logging.getLogger(__name__)
 class Player(object):
     def __init__(self, nick):
         self.nick = nick
+        self.heap = []
+
+    def addCard(self, card):
+        self.heap.append(card)
+
+    def sayGame(self, serverData):
+        logger.debug('say cards for ' + self.nick)
+        msg = 'your turn : '
+        elem = 0
+        for card in self.heap:
+            elem += 1
+            msg += '[{}] {} '.format(elem, card)
+        serverData.privmsg(self.nick, msg)
 
 class CAHGame(object):
-    def __init__(self, dispatch, channel, serverData):
+    def __init__(self, dispatch, channel, serverData, blackCardStack, whiteCardStack):
         self.channel = channel
         self.serverData = serverData
         self.players = []
         self.state = 'NOT_RUNNING'
         self.lockState = RLock()
+        self.whiteCardStack = whiteCardStack
+        self.blackCardStack = blackCardStack
         dispatch.appendCmd('join', self.joinCmd)
 
     def _say(self, msg):
@@ -38,13 +53,29 @@ class CAHGame(object):
     def _endWaitPeople(self):
         logger.info('end of timeout, check if enough people to play')
         with self.lockState:
-            if len(self.players) < 3:
-                self.state = 'NOT_RUNNING'
-                self._say('You need to be 3 to play, only {0} people here, stop game'.format(len(self.players)))
-                return
+            #if len(self.players) < 3:
+            #    self.state = 'NOT_RUNNING'
+            #    self._say('You need to be 3 to play, only {0} people here, stop game'.format(len(self.players)))
+            #    return
             self.state = 'ROUND_START'
         logger.info('game start')
+        self._giveInitialTurn()
+        self._beginTurn()
 
+    def _giveInitialTurn(self):
+        logger.debug('give initial hand for each player')
+        for player in self.players:
+            for cardNumber in range(0,9):
+                player.addCard(self.whiteCardStack.pick())
+
+    def _beginTurn(self):
+        logger.debug('begin a new turn')
+        blackCard = self.blackCardStack.pick()
+        self._say("sentance is : " + blackCard.printEmpty())
+        for player in self.players:
+            for cardNumber in range(0, blackCard.pick):
+                player.addCard(self.whiteCardStack.pick())
+            player.sayGame(self.serverData)
 
     def start(self, nick):
         logger.info('new game on channel ' + self.channel)
