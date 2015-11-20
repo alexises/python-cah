@@ -22,8 +22,8 @@ class Player(object):
     
     def removeCards(self, cards):
         cards.sort()
-        for index, values in cards:
-           self.heap.remove(value - index)
+        for index, value in enumerate(cards):
+           del self.heap[value - index]
 
 class PlayedCards(object):
     def __init__(self):
@@ -76,6 +76,7 @@ class CAHGame(CAHGameUtils):
         self.blackCardStack = blackCardStack
         self.czar = -1
         dispatch.appendCmd('join', self.joinCmd)
+        dispatch.appendCmd('pick', self.pickCmd)
 
     def joinCmd(self, serverData, channel, user, args):
         ''' 1) join a party '''
@@ -128,13 +129,13 @@ class CAHGame(CAHGameUtils):
             player.sayGame(self.serverData)
 
         with self.lockState:
-            self.state = 'WAIT_BLACK'
+            self.state = 'WAIT_WHITE'
         self.currenTimer = Timer(60, self._endWaitWhiteCard).start()
 
 
     def _playWhiteCards(self, serverData, channel, user, args):
         ''' 5) play white card '''
-        logger.info('{} is playing white cards {}', user, args)
+        logger.info('{} is playing white cards {}'.format(user, args))
         logger.debug('search for player')
         player = None
         for checkedPlayer in self.players:
@@ -148,8 +149,9 @@ class CAHGame(CAHGameUtils):
             logger.debug('player have already played')
             return
         if len(args) != self.currentBlackCard.pick:
-            self.warning('played {} white card, need {}'.format(len(args), self.currentBlackCard.pick))
-            self._privateSay(user, '{}: you should pick {} cards'.format(nick, self.currentBlackCard.pick))
+            logger.warning('played {} white card, need {}'.format(len(args), self.currentBlackCard.pick))
+            self._privateSay(user, '{}: you should pick {} cards'.format(user, self.currentBlackCard.pick))
+            return
         cards = []
         realArgs = []
         try:
@@ -161,8 +163,8 @@ class CAHGame(CAHGameUtils):
                 cards.append(player.heap[idx])
         except ValueError:
             self._privateSay(user, 'argument should be number between 1 and {}'.format(9+self.currentBlackCard.pick))
-        player.removeCards(cards)
-        self.playedCards.add(user, cards)
+        player.removeCards(realArgs)
+        self.playedCards.append(user, cards)
         self._privateSay(user, 'ok, your turn is in the machine')
 
     def _endWaitWhiteCard(self):
@@ -183,7 +185,7 @@ class CAHGame(CAHGameUtils):
         ''' 8) select the winner '''
         pass
 
-    def joinCmd(self, serverData, channel, user, args):
+    def pickCmd(self, serverData, channel, user, args):
         with self.lockState:
             if self.state == 'WAIT_WHITE':
                 #we are on step 5
@@ -192,7 +194,7 @@ class CAHGame(CAHGameUtils):
                 #we are on step 8
                 self._selectWinner(serverData, channel, user, args)
             else:
-                self.warning('command used in bad context')
+                logger.warning('command used in bad context')
                 return
 
     def start(self, nick):
