@@ -130,7 +130,8 @@ class CAHGame(CAHGameUtils):
 
         with self.lockState:
             self.state = 'WAIT_WHITE'
-        self.currenTimer = Timer(60, self._endWaitWhiteCard).start()
+        self.currentTimer = Timer(60, self._endWaitWhiteCard)
+        self.currentTimer.start()
 
 
     def _playWhiteCards(self, serverData, channel, user, args):
@@ -148,6 +149,7 @@ class CAHGame(CAHGameUtils):
         if self.playedCards.search(user):
             logger.debug('player have already played')
             return
+        #todo check if czar
         if len(args) != self.currentBlackCard.pick:
             logger.warning('played {} white card, need {}'.format(len(args), self.currentBlackCard.pick))
             self._privateSay(user, '{}: you should pick {} cards'.format(user, self.currentBlackCard.pick))
@@ -166,6 +168,8 @@ class CAHGame(CAHGameUtils):
         player.removeCards(realArgs)
         self.playedCards.append(user, cards)
         self._privateSay(user, 'ok, your turn is in the machine')
+        if len(self.playedCards) == (len(self.player) - 1):
+            self._beginCzarTurn()
 
     def _endWaitWhiteCard(self):
         ''' 6) discard lazy people that not played white card '''
@@ -179,7 +183,13 @@ class CAHGame(CAHGameUtils):
 
     def _beginCzarTurn(self):
         ''' 7) show all proposition and wait for the czar decision '''
-        pass
+        with self.lockState:
+            self.state = 'WAIT_BLACK'
+            self.currentTimer.stop()
+        self.playedCards.shuffle()
+        for index, card in enumerate(self.playedCards.heap):
+             self._say('[{}] {}'.format(index + 1 , self.currentBlackCard.printSentance(card['cards'])))
+        self._say('{} : please choose your sentance with !pick <number>'.format(self.player.heap[self.csar]))
 
     def _selectWinner(self, serverData, channel, user, args):
         ''' 8) select the winner '''
