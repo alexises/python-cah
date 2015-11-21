@@ -12,7 +12,7 @@ class CmdDispatch(object):
     def appendCmd(self, cmdName, callback):
         self.cmd[cmdName] = callback
 
-    def dispatch(self, serverData, channel, user, command, args): 
+    def dispatch(self, serverData, channel, user, command, args):
         logger.debug('dispach command : ' + command)
         if not self.cmd.has_key(command):
             logger.warning('unknow command, skip it')
@@ -22,7 +22,7 @@ class CmdDispatch(object):
 
 class BaseGameDispatch(CmdDispatch):
     def __init__(self, blackDeckFiles, whiteDeckFiles):
-        super(BaseGameDispatch, self).__init__()   
+        super(BaseGameDispatch, self).__init__() 
         self.party = {}
         self.whiteDeck = MultiStack()
         self.blackDeck = MultiStack()
@@ -31,7 +31,7 @@ class BaseGameDispatch(CmdDispatch):
         self.appendCmd('log', self.logCmd)
         self.appendCmd('start', self.startCmd)
         self.appendCmd('notice', self.noticeCmd)
-    
+ 
     def logCmd(self, serverData, channel, user, args):
         logger.info('LOG '+ str(args))
 

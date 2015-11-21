@@ -9,7 +9,7 @@ from dispatch import BaseGameDispatch
 logger = logging.getLogger(__name__)
 
 
-def printEntry(c, e):
+def printEntry(e):
     """printEntry : print a line of public channel"""
     date = datetime.now()
     dateTxt = date.__format__('%H:%M:%S')
@@ -49,20 +49,20 @@ class CahBot(SingleServerIRCBot):
 
     def on_privmsg(self, c, e):
         self.on_pubmsg(c, e)
- 
+
     def on_pubmsg(self, c, e):
-        printEntry(c, e)
+        printEntry(e)
         msg = e.arguments()[0]
         token = msg[0]
         chan = e.target()
         user = e.source().split('!')[0]
         if chan[0] != '#':
-           chan = ''
+            chan = ''
         logger.debug('new msg')
         if token != self.token:
             logger.debug('not a command, avoid')
             return
-        #filter empty component, like have two space 
+        #filter empty component, like have two space
         #between cmd arguments
         cmdComponents = filter(None, msg[1:].split(' '))
         if len(cmdComponents) < 1:
@@ -70,7 +70,6 @@ class CahBot(SingleServerIRCBot):
             return
         cmd = cmdComponents[0]
         self.dispatcher.dispatch(c, chan, user, cmd, cmdComponents[1:])
-        
 
     def get_version(self):
         return self.ctcp

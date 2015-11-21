@@ -20,11 +20,11 @@ class Player(object):
             elem += 1
             msg += '[{}] {} '.format(elem, card)
         serverData.privmsg(self.nick, msg)
-    
+ 
     def removeCards(self, cards):
         cards.sort()
         for index, value in enumerate(cards):
-           del self.heap[value - index]
+            del self.heap[value - index]
 
 class PlayedCards(object):
     def __init__(self):
@@ -32,7 +32,7 @@ class PlayedCards(object):
 
     def append(self, nick, cards):
         logger.debug('{} had played {}'.format(nick, cards))
-        self.heap.append({ 'nick' : nick, 'cards' : cards})
+        self.heap.append({ 'nick' : nick, 'cards' : cards })
 
     def shuffle(self):
         shuffle(self.heap)
@@ -55,7 +55,7 @@ class CAHGameUtils(object):
     def _sayScore(self):
         scoreMsg = 'score : '
         for player in self.players:
-            scorePlayerMsg = '{} : {},'.format(player.nick, player.score) 
+            scorePlayerMsg = '{} : {},'.format(player.nick, player.score)
             scoreMsg += scorePlayerMsg
         scoreMsg = scoreMsg[:-1]
         self._say(scoreMsg)
@@ -67,7 +67,7 @@ class CAHGameUtils(object):
         self.serverData.privmsg(nick, msg)
 
     def _addPlayer(self, nick):
-        logger.info('add a new player : ' + nick) 
+        logger.info('add a new player : ' + nick)
         self.players.append(Player(nick))
         self._say('{0} join the party'.format(nick))
 
@@ -95,7 +95,7 @@ class CAHGame(CAHGameUtils):
                     logger.warning('user already registered')
                     return
             self._addPlayer(user)
- 
+
     def _endWaitPeople(self):
         ''' 2) wait all people '''
         logger.info('end of timeout, check if enough people to play')
@@ -113,11 +113,11 @@ class CAHGame(CAHGameUtils):
         ''' 3) give initial hand'''
         logger.debug('give initial hand for each player')
         for player in self.players:
-            for cardNumber in range(0,9):
+            for cardNumber in range(0, 9):
                 player.addCard(self.whiteCardStack.pick())
 
     def _beginTurn(self):
-        ''' 4) select the czar, pick black card, pick white card ans wait 
+        ''' 4) select the czar, pick black card, pick white card ans wait
         for white people to play
         '''
         logger.debug('begin a new turn')
@@ -169,7 +169,7 @@ class CAHGame(CAHGameUtils):
                 idx = int(i)
                 if idx > (9+ self.currentBlackCard.pick):
                     raise ValueError('')
-                realArgs.append(idx - 1) 
+                realArgs.append(idx - 1)
                 cards.append(player.heap[idx])
         except ValueError:
             self._privateSay(user, 'argument should be number between 1 and {}'.format(9+self.currentBlackCard.pick))
@@ -183,11 +183,11 @@ class CAHGame(CAHGameUtils):
         ''' 6) discard lazy people that not played white card '''
         with self.lockState:
             if self.state != 'WAIT_WHITE':
-               return
+                return
         logger.info('timeout for playing white card is expired')
         self._say('timeout for playing white card is expired')
         self._say("peoples that haven't played are disquilified for this turn")
-        self._beginCzarTurn(False)    
+        self._beginCzarTurn(False)
 
     def _beginCzarTurn(self, normalEnd=True):
         ''' 7) show all proposition and wait for the czar decision '''
@@ -197,7 +197,7 @@ class CAHGame(CAHGameUtils):
                 self.currentTimer.cancel()
         self.playedCards.shuffle()
         for index, card in enumerate(self.playedCards.heap):
-             self._say('[{}] {}'.format(index + 1 , self.currentBlackCard.printSentance(card['cards'])))
+            self._say('[{}] {}'.format(index + 1, self.currentBlackCard.printSentance(card['cards'])))
         self._say('{} : please choose your sentance with !pick <number>'.format(self.players[self.czar].nick))
 
     def _selectWinner(self, serverData, channel, user, args):
