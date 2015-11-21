@@ -2,6 +2,7 @@ from ircbot import SingleServerIRCBot
 from config import nick, server, port, chan, ctcp, token
 import logging
 import sys
+import traceback
 from glob import glob
 from datetime import datetime
 from dispatch import BaseGameDispatch
@@ -46,12 +47,18 @@ class CahBot(SingleServerIRCBot):
         logger.debug('join chan : ' + self.channel)
         c.join(self.channel)
 
+    def on_privmsg(self, c, e):
+        self.on_pubmsg(c, e)
+ 
     def on_pubmsg(self, c, e):
         printEntry(c, e)
         msg = e.arguments()[0]
         token = msg[0]
         chan = e.target()
         user = e.source().split('!')[0]
+        if chan[0] != '#':
+           chan = ''
+        logger.debug('new msg')
         if token != self.token:
             logger.debug('not a command, avoid')
             return
@@ -80,8 +87,13 @@ def main():
     BlackCardsFile = glob('./cards/*_q.json')
     WhiteCardsFile = glob('./cards/*_a.json')
     dispatch = BaseGameDispatch(BlackCardsFile, WhiteCardsFile)
-    bot = CahBot(chan, nick, ctcp, server, dispatch, port, ssl=True, token=token)
-    bot.start()
-
+    try:
+        bot = CahBot(chan, nick, ctcp, server, dispatch, port, ssl=True, token=token)
+        bot.start()
+    except KeyboardInterrupt:
+        print "CTRL + C hit, close the bot"
+    except Exception:
+        traceback.print_exc(file=sys.stdout)
+    sys.exit(0)
 if __name__ == "__main__":
     main()

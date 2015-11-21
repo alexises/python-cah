@@ -58,7 +58,7 @@ class BlackCard(object):
          self.value = value
          self.pick = pick
 
-     def printSentance(self, *value):
+     def printSentance(self, value):
          ''' 
          return card filled with white proposition 
          '''
@@ -72,7 +72,7 @@ class BlackCard(object):
 
      def printEmpty(self):
          param = ['____']*self.pick
-         return self.printSentance(*param)
+         return self.printSentance(param)
 
 class WhiteCard(object):
      def __init__(self, value):
