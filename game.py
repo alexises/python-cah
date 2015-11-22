@@ -4,6 +4,10 @@ from random import shuffle
 logger = logging.getLogger(__name__)
 
 class Player(object):
+    '''
+    Player, store information about a player profile
+    along the party
+    '''
     def __init__(self, nick):
         self.nick = nick
         self.heap = []
@@ -27,6 +31,11 @@ class Player(object):
             del self.heap[value - index]
 
 class PlayedCards(object):
+    '''
+    PlayerCards : store and manage cards played during a round
+    this also provide a way to shuffle the card heap before
+    print them
+    '''
     def __init__(self):
         self.heap = []
 
@@ -47,6 +56,9 @@ class PlayedCards(object):
         return len(self.heap)
 
 class CAHGameUtils(object):
+    '''
+    CAHGameUtils : define usefull routine used along the game
+    '''
     def __init__(self, serverData, channel):
         self.serverData = serverData
         self.channel = channel
@@ -80,8 +92,10 @@ class CAHGame(CAHGameUtils):
         self.whiteCardStack = whiteCardStack
         self.blackCardStack = blackCardStack
         self.czar = -1
+
         dispatch.appendCmd('join', self.joinCmd)
         dispatch.appendCmd('pick', self.pickCmd)
+        dispatch.appendCmd('score', self.scoreCmd)
 
     def joinCmd(self, serverData, channel, user, args):
         ''' 1) join a party '''
@@ -122,10 +136,13 @@ class CAHGame(CAHGameUtils):
         '''
         logger.debug('begin a new turn')
         self.playedCards = PlayedCards()
+
         self.czar = (self.czar + 1) % len(self.players)
         self._say("{} is the czar".format(self.players[self.czar].nick))
+        
         self.currentBlackCard = self.blackCardStack.pick()
         self._say("sentance is : " + self.currentBlackCard.printEmpty())
+        
         for player in self.players:
             if player == self.players[self.czar]:
                 continue
@@ -142,6 +159,7 @@ class CAHGame(CAHGameUtils):
     def _playWhiteCards(self, serverData, channel, user, args):
         ''' 5) play white card '''
         logger.info('{} is playing white cards {}'.format(user, args))
+
         logger.debug('search for player')
         player = None
         for checkedPlayer in self.players:
@@ -158,6 +176,7 @@ class CAHGame(CAHGameUtils):
             logger.warning('czar try to play a white card')
             self._say("{}, your are the czar and can't play yet".format(user))
             return
+
         if len(args) != self.currentBlackCard.pick:
             logger.warning('played {} white card, need {}'.format(len(args), self.currentBlackCard.pick))
             self._privateSay(user, '{}: you should pick {} cards'.format(user, self.currentBlackCard.pick))
@@ -173,6 +192,7 @@ class CAHGame(CAHGameUtils):
                 cards.append(player.heap[idx])
         except ValueError:
             self._privateSay(user, 'argument should be number between 1 and {}'.format(9+self.currentBlackCard.pick))
+
         player.removeCards(realArgs)
         self.playedCards.append(user, cards)
         self._privateSay(user, 'ok, your turn is in the machine')
@@ -191,10 +211,12 @@ class CAHGame(CAHGameUtils):
 
     def _beginCzarTurn(self, normalEnd=True):
         ''' 7) show all proposition and wait for the czar decision '''
+        #if all people have play before the end of the timer we should stop it
         with self.lockState:
             self.state = 'WAIT_CZAR'
             if normalEnd:
                 self.currentTimer.cancel()
+
         self.playedCards.shuffle()
         for index, card in enumerate(self.playedCards.heap):
             self._say('[{}] {}'.format(index + 1, self.currentBlackCard.printSentance(card['cards'])))
@@ -219,11 +241,13 @@ class CAHGame(CAHGameUtils):
         if card < 1 or card > len(self.playedCards):
             self._say("{}, you should pick a card between 1 and {}".format(user, len(self.playedCards)))
             return
+
         winner = self.players[card]
         winner.score += 1
         whiteCards = self.playedCards.heap[card]['cards']
         sentance = self.currentBlackCard.printSentance(whiteCards)
         self._say("{} is the winner with {}".format(winner.nick, sentance))
+        
         self._sayScore()
         self._beginTurn()
 
@@ -238,6 +262,12 @@ class CAHGame(CAHGameUtils):
             else:
                 logger.warning('command used in bad context')
                 return
+
+    def scoreCmd(self, serverData, channel, user, args):
+        ''' 
+        scoreCmd : print the current score
+        '''
+        self._printScore()
 
     def start(self, nick):
         logger.info('new game on channel ' + self.channel)
