@@ -68,9 +68,9 @@ class CAHGameUtils(object):
     def _sayScore(self):
         scoreMsg = i18n.score
         for player in self.players:
-            scorePlayerMsg = '{} : {},'.format(player.nick, player.score)
+            scorePlayerMsg = '{} : {}, '.format(player.nick, player.score)
             scoreMsg += scorePlayerMsg
-        scoreMsg = scoreMsg[:-1]
+        scoreMsg = scoreMsg[:-2]
         self._say(scoreMsg)
 
     def _say(self, msg):
@@ -97,6 +97,7 @@ class CAHGame(CAHGameUtils):
         dispatch.appendCmd('join', self.joinCmd)
         dispatch.appendCmd('pick', self.pickCmd)
         dispatch.appendCmd('score', self.scoreCmd)
+        dispatch.appendCmd('hand', self.handCmd)
 
     def joinCmd(self, serverData, channel, user, args):
         ''' 1) join a party '''
@@ -268,7 +269,20 @@ class CAHGame(CAHGameUtils):
         ''' 
         scoreCmd : print the current score
         '''
-        self._printScore()
+        self._sayScore()
+
+    def handCmd(self, serverData, channel, user, args):
+        '''
+        handCmd : print current hand
+        '''
+        player = None
+        for checkedPlayer in self.players:
+            if checkedPlayer.nick == user:
+                player = checkedPlayer
+                break
+        if player == None:
+            return
+        player.sayGame(serverData)
 
     def start(self, nick):
         logger.info('new game on channel ' + self.channel)

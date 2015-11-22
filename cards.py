@@ -112,6 +112,6 @@ class WhiteCardStack(CardStack):
                 logger.error('bad kind of responde, skip entry {0}', entryCount)
                 continue
             if not i.has_key('value'):
-                logger.error('no value, skip entry {0}'entryCount)
+                logger.error('no value, skip entry {0}'.entryCount)
                 continue
             self.stack.append(WhiteCard(i['value']))
