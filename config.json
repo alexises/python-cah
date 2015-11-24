@@ -1,0 +1,18 @@
+{
+  "ctcp" : "I'm a dunny bot under devel",
+  "nick" : "nono-devel",
+  "startTimeout" : 45,
+  "pickTimeout" : 45,
+  "servers" : [
+    {
+      "server" : "irc.iiens.net",
+      "port" : 7000,
+      "ssl" : true,
+      "sslCheck" : false,
+      "channels" : [
+        { "channel" : "#cahBot", "token" : ":"},
+        { "channel" : "#jeux" }
+      ]
+    }
+  ] 
+}
