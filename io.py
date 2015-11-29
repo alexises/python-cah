@@ -4,6 +4,7 @@ import ssl
 import select
 import re
 from pprint import pformat
+from threading import Thread
 logger = logging.getLogger(__name__)
 
 class Event(object):
@@ -156,6 +157,14 @@ class IrcClient(object):
                     continue
                 self._computeMsg(msg)
             
-            
+class NonBlockingIrcClient(IrcClient):
+    def __init__(self, server, port, nick, ctcp, ident=None, realname=None, ssl=False, sslCheck=True):
+        super(NonBlockingIrcClient, self).__init__(server, port, nick, ctcp, ident, realname, ssl, sslCheck)
+        self._thread = Thread(target = self.connect )
+        self._thread.daemon = True
+
+    def start(self):
+        self._thread.start()
+ 
 class MutiIrcClient(object):
     pass
