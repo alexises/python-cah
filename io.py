@@ -47,13 +47,17 @@ class IrcClient(object):
         if realname == None:
            self.realname = self.ctcp
            
-        self._channel = []
+        self._channels = []
         self._buffer = ''
+        self._events = {}
+        self._events['PING'] = self._pong
+        #end of motd
+        self._events['376'] = self._autoJoin
 
     def addChannel(self, channel):
         if channel[0] != '#':
             raise ValueError('not a valid irc channel')
-        self._channel.append(channel)
+        self._channels.append(channel)
 
     def _bindSSL(self):
         ctx = ssl.create_default_context(ssl.Purpose.SERVER_AUTH)
@@ -63,7 +67,7 @@ class IrcClient(object):
         if self.sslCheck:
             logger.debug('ssl check required')
             ctx.verify_mode = ssl.CERT_REQUIRED
-            #ctx.load_default_certs()
+            ctx.load_default_certs()
             ctx.check_hostname = True
         else:
             logger.debug('no certificate check')
@@ -108,20 +112,36 @@ class IrcClient(object):
 
         server = ''
         if msg[0] == ':':
-           server = msg[1:].split(' ')[0]
-           msg = msg[2+len(server):]
+            server = msg[1:].split(' ')[0]
+            msg = msg[2+len(server):]
         component = msg.split(':')
         longParam = ':'.join(component[1:])
         param = filter(len, component[0].split(' '))
         cmd = param[0]
         param = param[1:] + [longParam]
         logger.debug("server '{}' cmd '{}' param '{}'".format(server, cmd, param)) 
+       
+        try:
+            for cmd in self._events[cmd]:
+                cmd(cmd, server, param)
+        except TypeError:
+            self._events[cmd](cmd, server, param)
+        except KeyError:
+            #no event, just skip it
+            pass
 
-        if cmd == 'PING':
-            self._pong(param[0])
+    def _pong(self, cmd, server, param):
+        self.sendCmd('PONG', param[0])
 
-    def _pong(self, server):
-        self.sendCmd('PONG', server)
+    def join(self, channel):
+        if channel[0] != '#' and channel[0] != '&':
+            logger.error('not a valid channel, skip')
+        else:
+            self.sendCmd('JOIN', channel)
+
+    def _autoJoin(self, cmd, server, param):
+        for i in self._channels:
+            self.join(i)
 
     def _eventLoop(self):
         while 1:
