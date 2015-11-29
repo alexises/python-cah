@@ -1,23 +1,3 @@
-from ircbot import SingleServerIRCBot
-from config import loadConfig
-import logging
-import sys
-import traceback
-from glob import glob
-from datetime import datetime
-from dispatch import BaseGameDispatch
-logger = logging.getLogger(__name__)
-
-
-def printEntry(e):
-    """printEntry : print a line of public channel"""
-    date = datetime.now()
-    dateTxt = date.__format__('%H:%M:%S')
-    chan = e.target()
-    user = e.source().split('!')[0]
-    msg = e.arguments()[0]
-    print '{0} {1} <{2}> {3}'.format(dateTxt, chan, user, msg)
-
 class CahBot(SingleServerIRCBot):
     def __init__(self, channel, nick, ctcp, server, dispatcher, port, ssl, sslCheck):
         SingleServerIRCBot.__init__(self, [(server, port)], nick, ctcp)
@@ -74,21 +54,4 @@ class CahBot(SingleServerIRCBot):
     def get_version(self):
         return self.ctcp
 
-def main():
-    logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
-    logger.info('start app')
-    config = loadConfig
-    BlackCardsFile = glob('./cards/*_q.json')
-    WhiteCardsFile = glob('./cards/*_a.json')
-    dispatch = BaseGameDispatch(BlackCardsFile, WhiteCardsFile)
-    try:
-        for server in config.servers:
-            bot = CahBot(chan, nick, ctcp, server, dispatch, port, ssl=True, token=token)
-            bot.start()
-    except KeyboardInterrupt:
-        print "CTRL + C hit, close the bot"
-    except Exception:
-        traceback.print_exc(file=sys.stdout)
-    sys.exit(0)
-if __name__ == "__main__":
-    main()
+
