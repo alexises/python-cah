@@ -3,6 +3,7 @@ import socket
 import ssl
 import select
 import re
+from pprint import pformat
 logger = logging.getLogger(__name__)
 
 class Event(object):
@@ -30,7 +31,7 @@ IRC_MSG_SIZE = 512
 #as python-ircclient, some server seen to not folow
 #the IRC rfc and end message only with line field
 #or carrage return
-_messageDelimiter = re.compile("\r?\n")
+_messageDelimiter = re.compile("\r|\n|\r\n")
 class IrcClient(object):
     def __init__(self, server, port, nick, ctcp, ident=None, realname=None, ssl=False, sslCheck=True):
         self.server = server
@@ -55,18 +56,21 @@ class IrcClient(object):
         self._channel.append(channel)
 
     def _bindSSL(self):
-        ctx = ssl.create_default_context(Purpose.SERVER_AUTH)
+        ctx = ssl.create_default_context(ssl.Purpose.SERVER_AUTH)
         #set strict security option
-        ctx.set_ciphers('ECDH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256')
+        ctx.set_ciphers('DH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:ECDH+AES128:DH+AES:ECDH+3DES:DH+3DES:RSA+AESGCM:RSA+AES:RSA+3DES:!aNULL:!MD5:!DSS')
         ctx.options &= ssl.OP_NO_COMPRESSION
         if self.sslCheck:
             logger.debug('ssl check required')
             ctx.verify_mode = ssl.CERT_REQUIRED
+            #ctx.load_default_certs()
             ctx.check_hostname = True
         else:
             logger.debug('no certificate check')
+            ctx.check_hostname = False
             ctx.verify_mode = ssl.CERT_NONE
-        self._socket = ctx.wrap_socket(self._socket)
+        self._socket = ctx.wrap_socket(self._socket, 
+                                       server_hostname=self.server)
 
     def connect(self):
         for res in socket.getaddrinfo(self.server, self.port, socket.AF_UNSPEC, socket.SOCK_STREAM):
@@ -77,11 +81,18 @@ class IrcClient(object):
             except socket.error as msg:
                 self._socket = None
         if self.ssl:
-            self._bindSSL(self)
+            self._bindSSL()
         self._socket.connect(sa)
         logger.debug('we have connectioon, begin loop')
         self.sendCmd('NICK', self.nick)
         self.sendCmd('USER', '{0} {1} {1} :{2}'.format(self.nick, self.server, self.realname))
+        if self.ssl:
+            version = self._socket.version()
+            logger.info('ssl version : {}'.format(version))
+            cipher = self._socket.cipher()
+            logger.info('cipher : {}'.format(cipher))
+            cert = self._socket.getpeercert()
+            logger.info('provided certificate {}'.format(pformat(cert)))
         self._eventLoop()
 
     def sendCmd(self, cmd, args):
@@ -120,6 +131,9 @@ class IrcClient(object):
             
             self._buffer = lines.pop()
             for msg in lines:
+                if msg == '':
+                    #due to regexp biavior, we can have empty line
+                    continue
                 self._computeMsg(msg)
             
             
