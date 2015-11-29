@@ -7,8 +7,8 @@ def test():
     logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
     logger.info('start app')
     servers = []
-    servers.append({ 'server' : 'irc.iiens.net', 'port' : 7000, 'nick' : 'cahBot', 'ctcp' : 'cahBot', 'ssl' : True, 'sslCheck' : False })
-    servers.append({ 'server' : 'irc.freenode.net', 'port' : 7000, 'nick' : 'cahBot', 'ctcp' : 'cahBot', 'ssl' : True })
+    #servers.append({ 'server' : 'irc.iiens.net', 'port' : 7000, 'nick' : 'cahBot', 'ctcp' : 'cahBot', 'channels' : ['#jeux', '#cahBot'], 'ssl' : True, 'sslCheck' : False })
+    servers.append({ 'server' : 'irc.freenode.net', 'port' : 7000, 'nick' : 'cahBot', 'ctcp' : 'cahBot', 'channels' : ['#foobar42'], 'ssl' : True })
     logger.debug('{}'.format(servers))
     item = MultiIrcClient(servers)
     item.start()

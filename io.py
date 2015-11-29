@@ -182,8 +182,13 @@ class MultiIrcClient(object):
         self._servers = []
         self._queue = Queue()
         for server in servers:
-            self._servers.append(IrcClientNode(self._queue, **server))
-
+            channels = server['channels']
+            del server['channels']
+            client = IrcClientNode(self._queue, **server)
+            self._servers.append(client)
+            for i in channels:
+                client.addChannel(i)
+            
         self.command = {}
         self.command['NOTICE'] = self.notice
         self.command['PRIVMSG'] = self.privmsg
