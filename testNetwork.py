@@ -1,4 +1,4 @@
-from io import NonBlockingIrcClient
+from io import MultiIrcClient
 import logging
 import sys
 
@@ -6,14 +6,13 @@ logger = logging.getLogger(__name__)
 def test():
     logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
     logger.info('start app')
-    client = NonBlockingIrcClient('irc.iiens.net', 7000, 'cahBot', 'cahBot', ssl = True, sslCheck = False)
-    client.addChannel('#jeux')
-    client.addChannel('#cahBot')
-    client.start()
-    logger.info('client2')
-    client2 = NonBlockingIrcClient('irc.freenode.net', 7000, 'cahBot', 'cahBot', ssl = True)
-    client2.start()
-
+    servers = []
+    servers.append({ 'server' : 'irc.iiens.net', 'port' : 7000, 'nick' : 'cahBot', 'ctcp' : 'cahBot', 'ssl' : True, 'sslCheck' : False })
+    servers.append({ 'server' : 'irc.freenode.net', 'port' : 7000, 'nick' : 'cahBot', 'ctcp' : 'cahBot', 'ssl' : True })
+    logger.debug('{}'.format(servers))
+    item = MultiIrcClient(servers)
+    item.start()
+       
     while 1:
         pass 
 if __name__ == '__main__':

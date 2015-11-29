@@ -5,6 +5,7 @@ import select
 import re
 from pprint import pformat
 from threading import Thread
+from Queue import Queue
 logger = logging.getLogger(__name__)
 
 class Event(object):
@@ -165,6 +166,43 @@ class NonBlockingIrcClient(IrcClient):
 
     def start(self):
         self._thread.start()
- 
-class MutiIrcClient(object):
-    pass
+
+class IrcClientNode(NonBlockingIrcClient):
+    def __init__(self, queue, server, port, nick, ctcp, ident=None, realname=None, ssl=False, sslCheck=True):
+        super(IrcClientNode, self).__init__(server, port, nick, ctcp, ident, realname, ssl, sslCheck)
+        self._queue = queue
+        self._events['PRIVMSG'] = self._passEventInQueue
+        self._events['NOTICE'] = self._passEventInQueue
+
+    def _passEventInQueue(self, cmd, server, param):
+        self._queue.put((self, cmd, server, param))
+    
+class MultiIrcClient(object):
+    def __init__(self, servers):
+        self._servers = []
+        self._queue = Queue()
+        for server in servers:
+            self._servers.append(IrcClientNode(self._queue, **server))
+
+        self.command = {}
+        self.command['NOTICE'] = self.notice
+        self.command['PRIVMSG'] = self.privmsg
+
+    def privmsg(self, sender, issuer, message):
+        logger.debug('privmsg')
+        pass
+    
+    def notice(self, sender, issuer, message):
+        logger.debug('notice')
+        pass
+
+    def start(self):
+        for server in self._servers:
+            server.start()
+
+        while 1:
+            sender, cmd, server, param = self._queue.get()
+            if cmd == 'PRIVMSG' or cmd == 'NOTICE':
+                issuer = param[0]
+                message = param[0]
+            self.command[cmd](sender, issuer, message)
