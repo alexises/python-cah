@@ -35,7 +35,7 @@ IRC_MSG_SIZE = 512
 #or carrage return
 _messageDelimiter = re.compile("\r|\n|\r\n")
 class IrcClient(object):
-    def __init__(self, server, port, nick, ctcp, ident=None, realname=None, ssl=False, sslCheck=True):
+    def __init__(self, server, port, nick, ctcp, ident='', realname='', ssl=False, sslCheck=True):
         self.server = server
         self.port = port
         self.nick = nick
@@ -44,9 +44,9 @@ class IrcClient(object):
         self.ident = ident
         self.realname = realname
         self.ctcp = ctcp
-        if ident == None:
+        if ident == '':
            self.ident = self.nick
-        if realname == None:
+        if realname == '':
            self.realname = self.ctcp
            
         self._channels = []
@@ -174,8 +174,8 @@ class IrcClientNode(NonBlockingIrcClient):
         self._events['PRIVMSG'] = self._passEventInQueue
         self._events['NOTICE'] = self._passEventInQueue
 
-    def _passEventInQueue(self, cmd, server, param):
-        self._queue.put((self, cmd, server, param))
+    def _passEventInQueue(self, cmd, sender, param):
+        self._queue.put((self, cmd, sender, param))
     
 class MultiIrcClient(object):
     def __init__(self, servers):
@@ -193,11 +193,11 @@ class MultiIrcClient(object):
         self.command['NOTICE'] = self.notice
         self.command['PRIVMSG'] = self.privmsg
 
-    def privmsg(self, sender, issuer, message):
+    def privmsg(self, server, sender, destination, message):
         logger.debug('privmsg')
         pass
     
-    def notice(self, sender, issuer, message):
+    def notice(self, server, sender, destination, message):
         logger.debug('notice')
         pass
 
@@ -206,8 +206,8 @@ class MultiIrcClient(object):
             server.start()
 
         while 1:
-            sender, cmd, server, param = self._queue.get()
+            server, cmd, sender, param = self._queue.get()
             if cmd == 'PRIVMSG' or cmd == 'NOTICE':
-                issuer = param[0]
+                destination = param[0]
                 message = param[0]
-            self.command[cmd](sender, issuer, message)
+            self.command[cmd](server, sender, destination, message)
