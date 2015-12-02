@@ -101,6 +101,12 @@ class IrcClient(object):
             logger.info('provided certificate {}'.format(pformat(cert)))
         self._eventLoop()
 
+    def notice(self, dest, message):
+        self.sendCmd('NOTICE', dest + ' :' + message)
+   
+    def privmsg(self, dest, message):
+        self.sendCmd('PRIVMSG', dest + ' :' + message)
+
     def sendCmd(self, cmd, args):
         msg = cmd + ' ' + args + '\r\n'
         if len(msg) > IRC_MSG_SIZE:
@@ -209,5 +215,5 @@ class MultiIrcClient(object):
             server, cmd, sender, param = self._queue.get()
             if cmd == 'PRIVMSG' or cmd == 'NOTICE':
                 destination = param[0]
-                message = param[0]
+                message = param[1]
             self.command[cmd](server, sender, destination, message)

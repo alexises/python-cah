@@ -24,7 +24,7 @@ class Server(object):
             self._setDefaultChannelValue(channel)
 
     def _setDefaultChannelValue(self, channel):
-        if channel.token == '':
+        if channel.token == ' ':
             channel.token = self.token
         if channel.startTimeout == 0:
             channel.startTimeout == self.startTimeout
@@ -32,9 +32,12 @@ class Server(object):
             channel.pickTimeout == self.pickTimeout
 
     def __getitem__(self, key):
+        requestedChannel = key.lower()
         for i in self.channels:
-            if i.channel == key:
+            if i.channel.lower() == requestedChannel:
+                logger.debug('return {}'.format(i.channel))
                 return i
+        logger.warning('not a chennel, return default config')
         channel = Channel({ 'token' : '', 'startTimeout' : 0 , 'pickTimeout' : 0})
         self._setDefaultChannelValue(channel)
         return channel
@@ -67,7 +70,7 @@ class Config(object):
 
     def propagateDefaultValue(self):
         for server in self.servers:
-            if server.token == '':
+            if server.token == ' ':
                 server.token = self.token
             if server.startTimeout == 0:
                 server.startTimeout = self.startTimeout

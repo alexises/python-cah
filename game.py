@@ -40,9 +40,9 @@ class PlayedCards(object):
     def __init__(self):
         self.heap = []
 
-    def append(self, nick, cards):
-        logger.debug('{} had played {}'.format(nick, cards))
-        self.heap.append({ 'nick' : nick, 'cards' : cards })
+    def append(self, idx, nick, cards):
+        logger.debug('{} ({}) had played {}'.format(nick, idx, cards))
+        self.heap.append({ 'nick' : nick, 'id' : idx, 'cards' : cards })
 
     def shuffle(self):
         shuffle(self.heap)
@@ -164,7 +164,9 @@ class CAHGame(CAHGameUtils):
 
         logger.debug('search for player')
         player = None
+        idxPlayer = -1
         for checkedPlayer in self.players:
+            idxPlayer += 1
             if checkedPlayer.nick == user:
                 player = checkedPlayer
                 break
@@ -196,7 +198,7 @@ class CAHGame(CAHGameUtils):
             self._privateSay(user, i18n.cardOutOfRange.format(9+self.currentBlackCard.pick))
 
         player.removeCards(realArgs)
-        self.playedCards.append(user, cards)
+        self.playedCards.append(idxPlayer, user, cards)
         self._privateSay(user, i18n.pickAck)
         if len(self.playedCards) == (len(self.players) - 1):
             self._beginCzarTurn()
@@ -244,11 +246,12 @@ class CAHGame(CAHGameUtils):
             self._say(i18n.cardOutOfRange.format(len(self.playedCards)))
             return
 
-        winner = self.players[card]
-        winner.score += 1
-        whiteCards = self.playedCards.heap[card]['cards']
+        winner = self.playedCards.heap[card - 1]
+        self.players[winner['id']].score += 1
+     
+        whiteCards = winner['cards']
         sentance = self.currentBlackCard.printSentance(whiteCards)
-        self._say(i18n.winner.format(winner.nick, sentance))
+        self._say(i18n.winner.format(winner['nick'], sentance))
         
         self._sayScore()
         self._beginTurn()

@@ -11,7 +11,7 @@
       "sslCheck" : false,
       "channels" : [
         { "channel" : "#cahBot", "token" : ":"},
-        { "channel" : "#jeux" }
+        { "channel" : "#cahbot2" }
       ]
     }
   ] 
