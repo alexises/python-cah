@@ -1,6 +1,7 @@
 """ configuration for the bot """
 from marshmallow import Schema, fields, validate, post_load
 from pprint import pprint
+from security import AuthenticationManager as AM
 import json
 import logging
 
@@ -61,7 +62,7 @@ class Server(object):
 
 class Config(object):
     def __init__(self, data):
-        print data
+        pprint(data)
         self.__dict__.update(data)
         self.servers = []
         for i in data['servers']:
@@ -96,12 +97,22 @@ class Config(object):
             if i.port == port and i.server == server:
                 return i
 
+class RoleMappingSchema(Schema):
+    command = fields.Str(required = True)
+    role = fields.Str(required = True)
+
+class ACESchema(Schema):
+    server = fields.Str(missing = AM.ALL_SERVER)
+    channel = fields.Str(missing = AM.ALL_CHANNEL) 
+    nick = fields.Str(missing = AM.ALL_NICK)
+    ircRole = fields.Str(missing = AM.NO_ROLE, validate = validate.OneOf([AM.NO_ROLE, AM.VOICE, AM.HOP, AM.OP, AM.FOUNDER]))
+    role = fields.Str(required = True)
+
 class ChannelSchema(Schema):
     channel = fields.Str(required = True, validate = validate.Regexp(channelRegexp))
     token = fields.Str(missing = ' ', validate=validate.Length(min = 1, max = 1))
     startTimeout = fields.Integer(missing = 0, validate = validate.Range(min = 0, max = 300))
     pickTimeout = fields.Integer(missing = 0, validate = validate.Range(min = 0, max = 300))
-
 
 class ServerSchema(Schema):
     server = fields.Str(required=True)
@@ -126,6 +137,8 @@ class ConfigSchema(Schema):
     startTimeout = fields.Integer(missing = 60, validate = validate.Range(min = 1, max = 300))
     pickTimeout = fields.Integer(missing = 60, validate = validate.Range(min = 1, max = 300))
     servers = fields.Nested(ServerSchema, required = True, many = True)
+    acl = fields.Nested(ACESchema, required = True, many = True)
+    roleMapping = fields.Nested(RoleMappingSchema, required = True, many = True)
 
     @post_load
     def hydrate(self, data):

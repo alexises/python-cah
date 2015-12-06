@@ -14,5 +14,15 @@
         { "channel" : "#cahbot2" }
       ]
     }
-  ] 
+  ],
+  "acl" : [
+     { "role" : "ROLE_PLAYER" },
+     { "server" : "irc.iiens.net", "channel": "#cahBot", "nick" : "alexises", "role" : "ROLE_DEBUG" }
+  ],
+  "roleMapping" : [
+     { "command" : "log", "role" : "ROLE_DEBUG"},
+     { "command" : "notice", "role" : "ROLE_DEBUG"},
+     { "command" : "start", "role" : "ROLE_PLAYER"},
+     { "command" : "pick", "role" : "ROLE_PLAYER"}
+  ]
 }

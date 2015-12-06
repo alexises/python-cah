@@ -5,8 +5,9 @@ from cards import MultiStack, BlackCardStack, WhiteCardStack
 logger = logging.getLogger(__name__)
 
 class CmdDispatch(object):
-    def __init__(self):
+    def __init__(self, security):
         logger.debug('init CmdDispatch')
+        self.security = security
         self.cmd = {}
 
     def appendCmd(self, cmdName, callback):
@@ -17,12 +18,15 @@ class CmdDispatch(object):
         if not self.cmd.has_key(command):
             logger.warning('unknow command, skip it')
             return
+        if not self.security.authenticate(serverData.server, channel, user, '', command):
+            logger.warning('no permission allowed to execute this command, skip')
+            return
         callback = self.cmd[command]
         callback(serverData, channel, user, args)
 
 class BaseGameDispatch(CmdDispatch):
-    def __init__(self, blackDeckFiles, whiteDeckFiles):
-        super(BaseGameDispatch, self).__init__() 
+    def __init__(self, blackDeckFiles, whiteDeckFiles, security):
+        super(BaseGameDispatch, self).__init__(security) 
         self.party = {}
         self.whiteDeck = MultiStack()
         self.blackDeck = MultiStack()

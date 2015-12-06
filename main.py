@@ -1,5 +1,6 @@
 from irc import CahBot
 from config import loadConfig
+from security import authentication_from_config
 import logging
 import sys
 import traceback
@@ -14,7 +15,8 @@ def main():
     config = loadConfig('config.json')
     BlackCardsFile = glob('./cards/*_q.json')
     WhiteCardsFile = glob('./cards/*_a.json')
-    dispatch = BaseGameDispatch(BlackCardsFile, WhiteCardsFile)
+    auth = authentication_from_config(config.acl, config.roleMapping)
+    dispatch = BaseGameDispatch(BlackCardsFile, WhiteCardsFile, auth)
     bot = CahBot(config, dispatch)
     try:
         bot.start()
