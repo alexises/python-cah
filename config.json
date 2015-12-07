@@ -17,7 +17,8 @@
   ],
   "acl" : [
      { "role" : "ROLE_PLAYER" },
-     { "server" : "irc.iiens.net", "channel": "#cahBot", "nick" : "alexises", "role" : "ROLE_DEBUG" }
+     { "server" : "irc.iiens.net", "channel": "#cahBot", "nick" : "alexises", "role" : "ROLE_DEBUG" },
+     { "ircRole" : "&", "role" : "ROLE_DEBUG" }
   ],
   "roleMapping" : [
      { "command" : "log", "role" : "ROLE_DEBUG"},

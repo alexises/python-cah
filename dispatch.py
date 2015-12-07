@@ -18,7 +18,9 @@ class CmdDispatch(object):
         if not self.cmd.has_key(command):
             logger.warning('unknow command, skip it')
             return
-        if not self.security.authenticate(serverData.server, channel, user, '', command):
+        role = serverData.userList.getUserMode(channel, user)
+        logger.debug('irc role : "{}"'.format(role))
+        if not self.security.authenticate(serverData.server, channel, user, role, command):
             logger.warning('no permission allowed to execute this command, skip')
             return
         callback = self.cmd[command]

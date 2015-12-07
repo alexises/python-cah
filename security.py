@@ -45,7 +45,7 @@ class AuthenticationManager(object):
                 continue
             if nick != inick and inick != self.ALL_NICK:
                 continue
-            if ircRole != iircRole and irole != self.NO_ROLE:
+            if ircRole != iircRole and iircRole != self.NO_ROLE:
                 continue
             logger.info('mached acl {} {} {} {} {}'.format(iserver, ichannel, inick, iircRole, iappRole))
             groups.append(iappRole)
