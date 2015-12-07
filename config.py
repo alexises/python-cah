@@ -105,7 +105,7 @@ class ACESchema(Schema):
     server = fields.Str(missing = AM.ALL_SERVER)
     channel = fields.Str(missing = AM.ALL_CHANNEL) 
     nick = fields.Str(missing = AM.ALL_NICK)
-    ircRole = fields.Str(missing = AM.NO_ROLE, validate = validate.OneOf([AM.NO_ROLE, AM.VOICE, AM.HOP, AM.OP, AM.FOUNDER]))
+    ircRole = fields.Str(missing = AM.NO_ROLE, validate = validate.OneOf([AM.NO_ROLE, AM.VOICE, AM.HOP, AM.OP, AM.FOUNDER, AM.ADMIN]))
     role = fields.Str(required = True)
 
 class ChannelSchema(Schema):

@@ -24,7 +24,8 @@ class AuthenticationManager(object):
     NO_ROLE = ''
     VOICE = '+'
     OP = '@'
-    HOP = '&'
+    HOP = '%'
+    ADMIN = '&'
     FOUNDER = '~'
     def __init__(self):
         self.acl = []

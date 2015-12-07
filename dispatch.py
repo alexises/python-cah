@@ -35,6 +35,7 @@ class BaseGameDispatch(CmdDispatch):
         self.appendCmd('log', self.logCmd)
         self.appendCmd('start', self.startCmd)
         self.appendCmd('notice', self.noticeCmd)
+        self.appendCmd('list', self.listCmd)
  
     def logCmd(self, serverData, channel, user, args):
         logger.info('LOG '+ str(args))
@@ -42,6 +43,9 @@ class BaseGameDispatch(CmdDispatch):
     def noticeCmd(self, serverData, channel, user, args):
         logger.info('NOTICE '+ str(args))
         serverData.notice(args[0], string.join(args[1:], ' '))
+
+    def listCmd(self, serverData, channel, user, args):
+        serverData.userList.listLog(channel)
 
     def startCmd(self, serverData, channel, user, args):
         if self.party.has_key(channel):
