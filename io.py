@@ -83,8 +83,7 @@ class IrcClient(object):
             self._bindSSL()
         self._socket.connect(sa)
         logger.debug('we have connectioon, begin loop')
-        self.sendCmd('NICK', self.nick)
-        self.sendCmd('USER', '{0} {1} {1} :{2}'.format(self.nick, self.server, self.realname))
+        self._initialCmd()
         if self.ssl:
             version = self._socket.version()
             logger.info('ssl version : {}'.format(version))
@@ -93,6 +92,10 @@ class IrcClient(object):
             cert = self._socket.getpeercert()
             logger.info('provided certificate {}'.format(pformat(cert)))
         self._eventLoop()
+
+    def _initialCmd(self):
+        self.sendCmd('NICK', self.nick)
+        self.sendCmd('USER', '{0} {1} {1} :{2}'.format(self.nick, self.server, self.realname))
 
     def notice(self, dest, message):
         self.sendCmd('NOTICE', dest + ' :' + message)
@@ -147,7 +150,36 @@ class IrcClient(object):
                     continue
                 self._computeMsg(msg)
 
-VOICE = '+'
+class IRCCapabilityNegociationIrcClient(IrcClient):
+     def __init__(self, *param):
+         super(IRCCapabilityNegociationIrcClient, self).__init__(*param)
+         self._capabilityEvent = {}
+         self._events['CAP'] = self._capNegociation
+         self._capabilities = []
+
+     def _initialCmd(self):
+	 self.sendCmd('CAP', 'LS')
+         super(IRCCapabilityNegociationIrcClient, self)._initialCmd()
+
+     def _capNegociation(self, cmd, server, param):
+         try:
+             cmd = param[1]
+             capList = param[2]     
+         except IndexError:
+             pass
+         else:
+             logger.info('capability list ok')
+             for capability in capList.split(' '):
+                 logger.debug('add capability : ' + capability)
+                 if capability == '':
+                     continue
+                 self._capabilities.append(capability)
+                 if self._capabilityEvent.has_key(capability):
+                     self._capabilityEvent[capability]
+         #end of capability negociation
+         self.sendCmd('CAP', 'END')
+
+VOICE = '+'             
 OP = '@'
 HOP = '%'
 FOUNDER = '~'
@@ -198,7 +230,7 @@ class UserList(object):
         for nick, mode in self._channel[channel].iteritems():
              logger.debug('{}{}'.format(mode, nick))
 
-class AutoJoinIrcClient(IrcClient):
+class AutoJoinIrcClient(IRCCapabilityNegociationIrcClient):
     def __init__(self, server, port, nick, ctcp, ident=None, realname=None, ssl=False, sslCheck=True):
         super(AutoJoinIrcClient, self).__init__(server, port, nick, ctcp, ident, realname, ssl, sslCheck)
         self.userList = UserList()
