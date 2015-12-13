@@ -1,4 +1,4 @@
-from io import MultiIrcClient
+from pythonCah.irc.multiclient import MultiIrcClient
 import logging
 logger = logging.getLogger(__name__)
 
