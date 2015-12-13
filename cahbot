@@ -3,6 +3,7 @@ from pythonCah.bot import CahBot
 from pythonCah.config import loadConfig
 from pythonCah.security import authentication_from_config
 from pythonCah.dispatch import BaseGameDispatch
+from pythonCah.log import prepareLogging 
 
 import logging
 import sys
@@ -12,7 +13,7 @@ from datetime import datetime
 logger = logging.getLogger(__name__)
 
 def main():
-    logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
+    prepareLogging(logging.DEBUG)
     logger.info('start app')
     config = loadConfig('config.json')
     BlackCardsFile = glob('./cards/*_q.json')
