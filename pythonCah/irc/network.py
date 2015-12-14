@@ -27,6 +27,7 @@ class IrcClient(object):
            self.realname = self.ctcp
            
         self._buffer = ''
+        self._lines = []
         self._events = {}
         self._events['PING'] = self._pong
         #end of motd
@@ -101,28 +102,39 @@ class IrcClient(object):
         cmd = param[0]
         param = param[1:] + [longParam]
         logger.debug("server '{}' cmd '{}' param '{}'".format(server, cmd, param)) 
-       
-        try:
-            for cmd in self._events[cmd]:
-                cmd(cmd, server, param)
-        except TypeError:
-            self._events[cmd](cmd, server, param)
-        except KeyError:
-            #no event, just skip it
-            pass
+        
+        return (cmd, server, param)
 
     def _pong(self, cmd, server, param):
         self.sendCmd('PONG', param[0])
 
+    def _getCommand(self):
+        if len(self._lines) > 0:
+            return self._computeMsg(self._lines.pop(0))
+
+        select.select([self._socket], [], [])
+        data = self._socket.recv(4*IRC_MSG_SIZE)
+        lines = _messageDelimiter.split(self._buffer + data)
+        
+        self._buffer = lines.pop()
+        for line in lines:
+            if line == '':
+                #due to regexp biavior, we can have empty line
+                continue
+            self._lines.append(line)
+        return self._computeMsg(self._lines.pop(0))
+
     def _eventLoop(self):
         while 1:
-            select.select([self._socket], [], [])
-            data = self._socket.recv(4*IRC_MSG_SIZE)
-            lines = _messageDelimiter.split(self._buffer + data)
-            
-            self._buffer = lines.pop()
-            for msg in lines:
-                if msg == '':
-                    #due to regexp biavior, we can have empty line
-                    continue
-                self._computeMsg(msg)
+            (cmd, server, param) = self._getCommand()
+            try:
+                for callback in self._events[cmd]:
+                    callback(cmd, server, param)
+            except TypeError:
+                self._events[cmd](cmd, server, param)
+            except KeyError:
+                #no event, just skip it
+                pass
+
+
+
