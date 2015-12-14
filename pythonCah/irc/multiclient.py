@@ -21,6 +21,9 @@ class IrcClientNode(NonBlockingIrcClient):
         self._events['PRIVMSG'] = self._passEventInQueue
         self._events['NOTICE'] = self._passEventInQueue
 
+    def _handleSignal(self):
+        self._queue.put(('', 'EXCEPT', '', []))
+
     def _passEventInQueue(self, cmd, sender, param):
         self._queue.put((self, cmd, sender, param))
     
@@ -54,6 +57,8 @@ class MultiIrcClient(object):
 
         while 1:
             server, cmd, sender, param = self._queue.get()
+            if cmd == 'EXCEPT':
+                raise KeyboardInterrupt()
             if cmd == 'PRIVMSG' or cmd == 'NOTICE':
                 destination = param[0]
                 message = param[1]

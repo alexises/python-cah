@@ -4,13 +4,19 @@ import socket
 import ssl
 import select
 import re
+import os
 logger = logging.getLogger(__name__)
 
+
+(WAKEUP_FD_R, WAKEUP_FD_W) = os.pipe()
 IRC_MSG_SIZE = 512
 #as python-ircclient, some server seen to not folow
 #the IRC rfc and end message only with line field
 #or carrage return
 _messageDelimiter = re.compile("\r|\n|\r\n")
+
+class SignalException(Exception):
+    pass
 class IrcClient(object):
     def __init__(self, server, port, nick, ctcp, ident='', realname='', ssl=False, sslCheck=True):
         self.server = server
@@ -112,7 +118,12 @@ class IrcClient(object):
         if len(self._lines) > 0:
             return self._computeMsg(self._lines.pop(0))
 
-        select.select([self._socket], [], [])
+        (rfd, wfd, efd) = select.select([self._socket, WAKEUP_FD_R], [], [])
+        for fd in rfd:
+            if fd == WAKEUP_FD_R:
+                #we have been waked up by an exception, rage quid
+		logger.warning('an exception had just waked up, I stop running')
+                raise SignalException("I have been killed by another one")
         data = self._socket.recv(4*IRC_MSG_SIZE)
         lines = _messageDelimiter.split(self._buffer + data)
         
@@ -124,17 +135,23 @@ class IrcClient(object):
             self._lines.append(line)
         return self._computeMsg(self._lines.pop(0))
 
+    def _handleSignal(self):
+        pass
+
     def _eventLoop(self):
-        while 1:
-            (cmd, server, param) = self._getCommand()
-            try:
-                for callback in self._events[cmd]:
-                    callback(cmd, server, param)
-            except TypeError:
-                self._events[cmd](cmd, server, param)
-            except KeyError:
-                #no event, just skip it
-                pass
+        try:
+            while 1:
+                (cmd, server, param) = self._getCommand()
+                try:
+                    for callback in self._events[cmd]:
+                        callback(cmd, server, param)
+                except TypeError:
+                    self._events[cmd](cmd, server, param)
+                except KeyError:
+                    #no event, just skip it
+                    pass
+        except SignalException:
+            self._handleSignal()
 
 
 
