@@ -14,33 +14,33 @@ class UserList(object):
         self._channel = {}
 
     def joinUser(self, channel, nick, mode):
-        if not self._channel.has_key(channel):
+        if channel not in self._channel:
             self._channel[channel] = {}
         self._channel[channel][nick] = mode
 
     def getUserMode(self, channel, nick):
-        if not self._channel.has_key(channel):
+        if channel not in self._channel:
             return ''
-        if not self._channel[channel].has_key(nick):
+        if nick not in self._channel[channel]:
             return ''
         return self._channel[channel][nick]
 
     def partUser(self, channel, nick):
-        if not self._channel.has_key(channel):
+        if channel not in self._channel:
             return
-        if not self._channel[channel].has_key(nick):
+        if nick not in self._channel[channel]:
             return
         del self._channel[channel][nick]
 
     def mode(self, channel, nick, mode):
-        if not self._channel.has_key(channel):
+        if channel not in self._channel:
             return
-        if not self._channel[channel].has_key(nick):
+        if nick not in self._channel[channel]:
             return
 
         modifier = mode[0]
         modeItem = mode[1]
-        if not ROLE_MAPPING.has_key(modeItem):
+        if modeItem not in ROLE_MAPPING:
             return
 
         if modifier == '+':
@@ -50,7 +50,7 @@ class UserList(object):
 
     def listLog(self, channel):
         logger.debug('list for {}'.format(channel))
-        for nick, mode in self._channel[channel].iteritems():
+        for nick, mode in self._channel[channel].items():
              logger.debug('{}{}'.format(mode, nick))
 
 class AutoJoinIrcClient(IRCCapabilityNegociationIrcClient):

@@ -17,7 +17,7 @@ class CardStack(object):
             return data
 
     def _shuffle(self):
-        self.availableCards = range(0, len(self.stack))
+        self.availableCards = list(range(0, len(self.stack)))
         shuffle(self.availableCards)
 
     def pick(self):
@@ -89,13 +89,13 @@ class BlackCardStack(CardStack):
         for i in data:
             entryCount += 1
             #check entry
-            if not i.has_key('type') or i['type'] != 'Question':
+            if 'type' not in i or i['type'] != 'Question':
                 logger.error('bad kind of question, skip entry {0}', entryCount)
                 continue
-            if not i.has_key('value'):
+            if 'value' not in i:
                 logger.error('no value, skip entry {0}', entryCount)
                 continue
-            if not i.has_key('pick') or not isinstance(i['pick'], (int, long)):
+            if 'pick' not in i or not isinstance(i['pick'], int):
                 logger.debug('pick type ' + repr(type(i['pick'])))
                 logger.error('bad pick value, skip')
                 continue
@@ -108,10 +108,10 @@ class WhiteCardStack(CardStack):
         entryCount = -1
         for i in data:
             entryCount += 1
-            if not i.has_key('type') or i['type'] != 'Answer':
+            if 'type' not in i or i['type'] != 'Answer':
                 logger.error('bad kind of responde, skip entry {0}', entryCount)
                 continue
-            if not i.has_key('value'):
+            if 'value' not in i:
                 logger.error('no value, skip entry {0}'.entryCount)
                 continue
             self.stack.append(WhiteCard(i['value']))

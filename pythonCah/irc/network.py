@@ -69,8 +69,9 @@ class IrcClient(object):
         logger.debug('we have connectioon, begin loop')
         self._initialCmd()
         if self.ssl:
-            version = self._socket.version()
-            logger.info('ssl version : {}'.format(version))
+            #not yet available
+            #version = self._socket.version()
+            #logger.info('ssl version : {}'.format(version))
             cipher = self._socket.cipher()
             logger.info('cipher : {}'.format(cipher))
             cert = self._socket.getpeercert()
@@ -93,7 +94,7 @@ class IrcClient(object):
             raise ValueError('msg max size is {}, current message have {} size'.format(IRC_MSG_SIZE, len(msg)))
 
         logger.debug(msg)
-        self._socket.sendall(msg)
+        self._socket.sendall(bytes(msg, 'UTF-8'))
 
     def _computeMsg(self, msg):
         logger.debug(msg)
@@ -104,7 +105,7 @@ class IrcClient(object):
             msg = msg[2+len(server):]
         component = msg.split(':')
         longParam = ':'.join(component[1:])
-        param = filter(len, component[0].split(' '))
+        param = list(filter(len, component[0].split(' ')))
         cmd = param[0]
         param = param[1:] + [longParam]
         logger.debug("server '{}' cmd '{}' param '{}'".format(server, cmd, param)) 
@@ -122,9 +123,9 @@ class IrcClient(object):
         for fd in rfd:
             if fd == WAKEUP_FD_R:
                 #we have been waked up by an exception, rage quid
-		logger.warning('an exception had just waked up, I stop running')
+                logger.warning('an exception had just waked up, I stop running')
                 raise SignalException("I have been killed by another one")
-        data = self._socket.recv(4*IRC_MSG_SIZE)
+        data = self._socket.recv(4*IRC_MSG_SIZE).decode('UTF-8')
         lines = _messageDelimiter.split(self._buffer + data)
         
         self._buffer = lines.pop()

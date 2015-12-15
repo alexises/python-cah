@@ -2,7 +2,7 @@ import logging
 from pythonCah.irc.channelInfo import AutoJoinIrcClient
 import logging
 from threading import Thread
-from Queue import Queue
+from queue import Queue
 logger = logging.getLogger(__name__)
 
 class NonBlockingIrcClient(AutoJoinIrcClient):

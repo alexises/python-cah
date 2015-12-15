@@ -59,7 +59,7 @@ class AuthorizationManager(object):
    
     def add(self, command, role):
         logger.debug('add acl {} {}'.format(command, role)) 
-        if not self.acl.has_key(command):
+        if command not in self.acl:
             self.acl[command] = []
         self.acl[command].append(role)
 

@@ -1,7 +1,7 @@
 import logging
 import string
-from game import CAHGame
-from cards import MultiStack, BlackCardStack, WhiteCardStack
+from .game import CAHGame
+from .cards import MultiStack, BlackCardStack, WhiteCardStack
 logger = logging.getLogger(__name__)
 
 class CmdDispatch(object):
@@ -15,7 +15,7 @@ class CmdDispatch(object):
 
     def dispatch(self, serverData, channel, user, command, args):
         logger.debug('dispach command : ' + command)
-        if not self.cmd.has_key(command):
+        if command not in self.cmd:
             logger.warning('unknow command, skip it')
             return
         role = serverData.userList.getUserMode(channel, user)
@@ -50,7 +50,7 @@ class BaseGameDispatch(CmdDispatch):
         serverData.userList.listLog(channel)
 
     def startCmd(self, serverData, channel, user, args):
-        if self.party.has_key(channel):
+        if channel in self.party:
             logger.error('party already running, forbid command')
             return
         logger.info('start a new game under ' +  channel)

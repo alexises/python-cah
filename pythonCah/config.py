@@ -1,7 +1,7 @@
 """ configuration for the bot """
 from marshmallow import Schema, fields, validate, post_load
 from pprint import pprint
-from security import AuthenticationManager as AM
+from .security import AuthenticationManager as AM
 import json
 import logging
 

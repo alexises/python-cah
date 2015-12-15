@@ -28,7 +28,7 @@ class CahBot(MultiIrcClient):
             return
         #filter empty component, like have two space
         #between cmd arguments
-        cmdComponents = filter(None, message[1:].split(' '))
+        cmdComponents = [_f for _f in message[1:].split(' ') if _f]
         if len(cmdComponents) < 1:
             logger.debug('only a token')
             return

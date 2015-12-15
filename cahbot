@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 from pythonCah.bot import CahBot
 from pythonCah.config import loadConfig
 from pythonCah.security import authentication_from_config
@@ -29,7 +29,7 @@ def main():
     try:
         bot.start()
     except KeyboardInterrupt:
-        print "CTRL + C hit, close the bot"
+        print("CTRL + C hit, close the bot")
     except Exception:
         traceback.print_exc(file=sys.stdout)
     sys.exit(0)

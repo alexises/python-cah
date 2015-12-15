@@ -11,7 +11,7 @@ class IRCCapabilityNegociationIrcClient(IrcClient):
          self._capabilities = []
 
      def _initialCmd(self):
-	 self.sendCmd('CAP', 'LS')
+         self.sendCmd('CAP', 'LS')
          super(IRCCapabilityNegociationIrcClient, self)._initialCmd()
 
      def _capNegociation(self, cmd, server, param):
@@ -27,7 +27,7 @@ class IRCCapabilityNegociationIrcClient(IrcClient):
                  if capability == '':
                      continue
                  self._capabilities.append(capability)
-                 if self._capabilityEvent.has_key(capability):
+                 if capability in self._capabilityEvent:
                      self._capabilityEvent[capability]
          #end of capability negociation
          self.sendCmd('CAP', 'END')

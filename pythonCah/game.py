@@ -1,7 +1,7 @@
 import logging
 from threading import RLock, Timer
 from random import shuffle
-import i18n
+from . import i18n
 logger = logging.getLogger(__name__)
 
 class Player(object):
