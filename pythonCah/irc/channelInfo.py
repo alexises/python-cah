@@ -1,5 +1,5 @@
 import logging
-from pythonCah.irc.ircv3 import IRCCapabilityNegociationIrcClient
+from pythonCah.irc.authentication import SaslCapableClient
 logger = logging.getLogger(__name__)
 
 VOICE = '+'             
@@ -53,11 +53,11 @@ class UserList(object):
         for nick, mode in self._channel[channel].items():
              logger.debug('{}{}'.format(mode, nick))
 
-class AutoJoinIrcClient(IRCCapabilityNegociationIrcClient):
-    def __init__(self, server, port, nick, ctcp, ident=None, realname=None, ssl=False, sslCheck=True):
-        super(AutoJoinIrcClient, self).__init__(server, port, nick, ctcp, ident, realname, ssl, sslCheck)
+class AutoJoinIrcClient(SaslCapableClient):
+    def __init__(self, *args, **kargs):
+        super(AutoJoinIrcClient, self).__init__(*args, **kargs)
         self.userList = UserList()
-        self._events['376'] = self._autoJoin
+        self._events['376'].append(self._autoJoin)
         self._events['353'] = self._addUser
         self._events['JOIN'] = self._userJoin
         self._events['PART'] = self._userPart

@@ -5,12 +5,17 @@ import base64
 logger = logging.getLogger(__name__)
 
 class SaslCapableClient(IRCCapabilityNegociationIrcClient):
-    def __init__(self, withSasl=False, password = '', *args, **kargs):
+    def __init__(self, *args, withSasl=False, password = '', **kargs):
         super(SaslCapableClient, self).__init__(*args, **kargs)
         self.password = password
         logger.debug('launch sasl capable client')
         if withSasl:
-            self._capabilites['sasl'] = self._negociateSasl
+            self._capabilityEvent['sasl'] = self._negociateSasl
+        elif password != '':
+            self._events['376'].append(self._nickservIdent)
+
+    def _nickservIdent(self):
+        self.privmsg('NickServ', 'IDENTIFY ' + self.password)
 
     def _negociateSasl(self):
         self.info('initiate sasl negociation')
@@ -52,7 +57,7 @@ class SaslCapableClient(IRCCapabilityNegociationIrcClient):
         if cmd == '903':
             logger.info('sasl authentication successfull')
             return
-        else
+        else:
             logger.critical('bad command, skip it')
             return
 

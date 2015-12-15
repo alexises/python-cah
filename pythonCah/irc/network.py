@@ -36,6 +36,7 @@ class IrcClient(object):
         self._lines = []
         self._events = {}
         self._events['PING'] = self._pong
+        self._events['376'] = []
         #end of motd
 
     def _bindSSL(self):
