@@ -53,6 +53,8 @@ class Server(object):
         params['realname'] = self.realname
         params['ssl'] = self.ssl
         params['sslCheck'] = self.sslCheck
+        params['withSasl'] = self.withSasl
+        params['password'] = self.password
         params['channels'] = []
         for i in self.channels:
             params['channels'].append(i.channel)
@@ -127,6 +129,8 @@ class ServerSchema(Schema):
     ssl = fields.Boolean(missing = False)
     sslCheck = fields.Boolean(missing = True)
     channels = fields.Nested(ChannelSchema, required = True, many = True)
+    withSasl = fields.Boolean(missing = False)
+    password = fields.Str(missing = '')
 
 class ConfigSchema(Schema):
     ctcp = fields.Str(missing = "python-cah")

@@ -4,8 +4,8 @@ logger = logging.getLogger(__name__)
 
 
 class IRCCapabilityNegociationIrcClient(IrcClient):
-     def __init__(self, *param):
-         super(IRCCapabilityNegociationIrcClient, self).__init__(*param)
+     def __init__(self, *args, **kargs):
+         super(IRCCapabilityNegociationIrcClient, self).__init__(*args, **kargs)
          self._capabilityEvent = {}
          self._events['CAP'] = self._capNegociation
          self._capabilities = []

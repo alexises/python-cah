@@ -6,8 +6,8 @@ from queue import Queue
 logger = logging.getLogger(__name__)
 
 class NonBlockingIrcClient(AutoJoinIrcClient):
-    def __init__(self, server, port, nick, ctcp, ident=None, realname=None, ssl=False, sslCheck=True):
-        super(NonBlockingIrcClient, self).__init__(server, port, nick, ctcp, ident, realname, ssl, sslCheck)
+    def __init__(self, *args, **kargs):
+        super(NonBlockingIrcClient, self).__init__(*args, **kargs)
         self._thread = Thread(target = self.connect )
         self._thread.daemon = True
 
@@ -15,8 +15,8 @@ class NonBlockingIrcClient(AutoJoinIrcClient):
         self._thread.start()
 
 class IrcClientNode(NonBlockingIrcClient):
-    def __init__(self, queue, server, port, nick, ctcp, ident=None, realname=None, ssl=False, sslCheck=True):
-        super(IrcClientNode, self).__init__(server, port, nick, ctcp, ident, realname, ssl, sslCheck)
+    def __init__(self, queue, *args, **kargs):
+        super(IrcClientNode, self).__init__(*args, **kargs)
         self._queue = queue
         self._events['PRIVMSG'] = self._passEventInQueue
         self._events['NOTICE'] = self._passEventInQueue

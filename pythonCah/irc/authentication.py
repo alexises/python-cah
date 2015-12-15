@@ -14,7 +14,7 @@ class SaslCapableClient(IRCCapabilityNegociationIrcClient):
         elif password != '':
             self._events['376'].append(self._nickservIdent)
 
-    def _nickservIdent(self):
+    def _nickservIdent(self, cmd, server, param):
         self.privmsg('NickServ', 'IDENTIFY ' + self.password)
 
     def _negociateSasl(self):
