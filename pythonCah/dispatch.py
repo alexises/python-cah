@@ -38,6 +38,7 @@ class BaseGameDispatch(CmdDispatch):
         self.appendCmd('start', self.startCmd)
         self.appendCmd('notice', self.noticeCmd)
         self.appendCmd('list', self.listCmd)
+        self.appendCmd('stop', self.stopCmd)
  
     def logCmd(self, serverData, channel, user, args):
         logger.info('LOG '+ str(args))
@@ -57,3 +58,12 @@ class BaseGameDispatch(CmdDispatch):
         game = CAHGame(self, channel, serverData, self.blackDeck, self.whiteDeck)
         game.start(user)
         self.party[channel] = game
+
+    def stopCmd(self, serverData, channel, user, args):
+        if channel not in self.party:
+            logger.error("no party is running, silent ignore")
+        party = self.party[channel]
+        party._say('stop requested, print score and exit')
+        party.scoreCmd(serverData, channel, user, args)
+        del self.party[channel]
+        del party

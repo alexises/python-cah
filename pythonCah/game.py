@@ -119,7 +119,7 @@ class CAHGame(CAHGameUtils):
         with self.lockState:
             if len(self.players) < 3:
                 self.state = 'NOT_RUNNING'
-                self._say(i18n.needMorePlayer.format(len(self.players)))
+                self._say(i18n.needMorePlayers.format(len(self.players)))
                 return
             self.state = 'ROUND_START'
         logger.info('game start')
