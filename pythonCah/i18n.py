@@ -16,3 +16,4 @@ notTheCzar = "{}, your are not the czar and can't play yet"
 pickUsage = "{}, usage: !pick <#>"
 winner = "{} is the winner with {}"
 newParty = 'Begining a new party, wait 1 min for players'
+cantStartYet = "You can't force-start yet, you need to be tree, you are {}"

@@ -9,6 +9,7 @@
       "port" : 7000,
       "ssl" : true,
       "sslCheck" : false,
+      "password" : "NON, tu n'auras pas le mot de passe",
       "channels" : [
         { "channel" : "#cahBot", "token" : ":"},
         { "channel" : "#cahbot2" }
@@ -18,13 +19,18 @@
   "acl" : [
      { "role" : "ROLE_PLAYER" },
      { "server" : "irc.iiens.net", "channel": "#cahBot", "nick" : "alexises", "role" : "ROLE_DEBUG" },
-     { "ircRole" : "&", "role" : "ROLE_DEBUG" }
+     { "ircRole" : "&", "role" : "ROLE_DEBUG" },
+     { "ircRole" : "~", "role" : "ROLE_ADMIN" },
+     { "ircRole" : "@", "role" : "ROLE_ADMIN" },
+     { "ircRole" : "&", "role" : "ROLE_ADMIN" }
   ],
   "roleMapping" : [
      { "command" : "log", "role" : "ROLE_DEBUG"},
      { "command" : "notice", "role" : "ROLE_DEBUG"},
      { "command" : "list", "role" : "ROLE_DEBUG"},
      { "command" : "start", "role" : "ROLE_PLAYER"},
-     { "command" : "pick", "role" : "ROLE_PLAYER"}
+     { "command" : "join", "role" : "ROLE_PLAYER"},
+     { "command" : "pick", "role" : "ROLE_PLAYER"},
+     { "command" : "force-start", "role": "ROLE_ADMIN"}
   ]
 }

@@ -98,6 +98,7 @@ class CAHGame(CAHGameUtils):
         dispatch.appendCmd('pick', self.pickCmd)
         dispatch.appendCmd('score', self.scoreCmd)
         dispatch.appendCmd('hand', self.handCmd)
+        dispatch.appendCmd('force-start', self.forceStartCmd)
 
     def joinCmd(self, serverData, channel, user, args):
         ''' 1) join a party '''
@@ -287,10 +288,24 @@ class CAHGame(CAHGameUtils):
             return
         player.sayGame(serverData)
 
+    def forceStartCmd(self, serverData, channel, user, args):
+        '''
+        forceStartCmd : force the launch of the game before end of timeout
+        '''
+        logger.info('force start-engaged')
+        if self.state != 'WAIT_PEOPLE':
+            logger.error('bad state for use force-start, we are on {}, expect WAIT_PEOPLE'.format(self.state))
+            return
+        if len(self.players) < 3:
+            self._say(i18n.cantStartYet.format(len(self.players)))
+        self.currentTimer.cancel()
+        self._endWaitPeople() 
+
     def start(self, nick):
         logger.info('new game on channel ' + self.channel)
         self._say(i18n.newParty)
         self._addPlayer(nick)
         with self.lockState:
-            Timer(60, self._endWaitPeople).start()
+            self.currentTimer = Timer(60, self._endWaitPeople)
+            self.currentTimer.start()
             self.state = 'WAIT_PEOPLE'
