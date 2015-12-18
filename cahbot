@@ -2,7 +2,7 @@
 from pythonCah.bot import CahBot
 from pythonCah.config import loadConfig
 from pythonCah.security import authentication_from_config
-from pythonCah.dispatch import BaseGameDispatch
+from pythonCah.dispatch import AutoVoiceDispatch
 from pythonCah.log import prepareLogging 
 from pythonCah.irc.network import WAKEUP_FD_W
 
@@ -24,7 +24,7 @@ def main():
     signal.set_wakeup_fd(WAKEUP_FD_W)
 
     auth = authentication_from_config(config.acl, config.roleMapping)
-    dispatch = BaseGameDispatch(BlackCardsFile, WhiteCardsFile, auth)
+    dispatch = AutoVoiceDispatch(BlackCardsFile, WhiteCardsFile, auth)
     bot = CahBot(config, dispatch)
     try:
         bot.start()

@@ -31,6 +31,8 @@ class Server(object):
             channel.startTimeout == self.startTimeout
         if channel.pickTimeout == 0:
             channel.pickTimeout == self.pickTimeout
+        if not hasattr(channel, 'autoVoice'):
+            channel.autoVoice = self.autoVoice
 
     def __getitem__(self, key):
         requestedChannel = key.lower()
@@ -83,6 +85,8 @@ class Config(object):
                 server.ctcp = self.ctcp
             if server.nick == '':
                 server.nick = self.nick
+            if not hasattr(server, 'autoVoice'):
+                server.autoVoice = self.autoVoice
             server.propagateDefaultValue()
 
     def serverList(self):
@@ -115,6 +119,7 @@ class ChannelSchema(Schema):
     token = fields.Str(missing = ' ', validate=validate.Length(min = 1, max = 1))
     startTimeout = fields.Integer(missing = 0, validate = validate.Range(min = 0, max = 300))
     pickTimeout = fields.Integer(missing = 0, validate = validate.Range(min = 0, max = 300))
+    autoVoice = fields.Boolean(required = False)
 
 class ServerSchema(Schema):
     server = fields.Str(required=True)
@@ -131,6 +136,7 @@ class ServerSchema(Schema):
     channels = fields.Nested(ChannelSchema, required = True, many = True)
     withSasl = fields.Boolean(missing = False)
     password = fields.Str(missing = '')
+    autoVoice = fields.Boolean(required = True)
 
 class ConfigSchema(Schema):
     ctcp = fields.Str(missing = "python-cah")
@@ -143,6 +149,7 @@ class ConfigSchema(Schema):
     servers = fields.Nested(ServerSchema, required = True, many = True)
     acl = fields.Nested(ACESchema, required = True, many = True)
     roleMapping = fields.Nested(RoleMappingSchema, required = True, many = True)
+    autoVoice = fields.Boolean(missing=False)
 
     @post_load
     def hydrate(self, data):

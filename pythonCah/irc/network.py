@@ -17,6 +17,7 @@ _messageDelimiter = re.compile("\r|\n|\r\n")
 
 class SignalException(Exception):
     pass
+
 class IrcClient(object):
     def __init__(self, server, port, nick, ctcp, ident='', realname='', ssl=False, sslCheck=True):
         self.server = server
@@ -89,6 +90,17 @@ class IrcClient(object):
     def privmsg(self, dest, message):
         self.sendCmd('PRIVMSG', dest + ' :' + message)
 
+    def mode(self, channel, mode, user):
+        if channel[0] not in ['#', '&']:
+            raise ValueError('bad channel argument')
+        if len(mode) != 2:
+            raise ValueError('bad mode specification')
+        if mode[0] not in ['+', '-']:
+            raise ValueError('bad mode modifier')
+        if len(user) < 1 or user[0] in ['#', '&']:
+            raise ValueError('bad user')
+        self.sendCmd('MODE', '{} {} {}'.format(channel, mode, user))
+
     def sendCmd(self, cmd, args):
         msg = cmd + ' ' + args + '\r\n'
         if len(msg) > IRC_MSG_SIZE:
@@ -154,6 +166,3 @@ class IrcClient(object):
                     pass
         except SignalException:
             self._handleSignal()
-
-
-

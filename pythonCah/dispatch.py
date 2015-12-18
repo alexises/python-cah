@@ -53,17 +53,46 @@ class BaseGameDispatch(CmdDispatch):
     def startCmd(self, serverData, channel, user, args):
         if channel in self.party:
             logger.error('party already running, forbid command')
-            return
+            return False
         logger.info('start a new game under ' +  channel)
         game = CAHGame(self, channel, serverData, self.blackDeck, self.whiteDeck)
         game.start(user)
         self.party[channel] = game
+        return True
 
     def stopCmd(self, serverData, channel, user, args):
         if channel not in self.party:
             logger.error("no party is running, silent ignore")
+            return False
         party = self.party[channel]
         party._say('stop requested, print score and exit')
         party.scoreCmd(serverData, channel, user, args)
         del self.party[channel]
         del party
+        return True
+
+class AutoVoiceDispatch(BaseGameDispatch):
+   def __init__(self, *args, **kargs):
+       super(AutoVoiceDispatch, self).__init__(*args, **kargs)
+       self._autoVoice = {}
+
+   def startCmd(self, serverData, channel, user, args):
+       result = super(AutoVoiceDispatch, self).startCmd(serverData, channel, user, args)
+       if not result:
+           return
+       mode = serverData.userList.getUserMode(channel, user)
+       if mode not in ['', ' ']:
+           #user already privilegied, skip
+           return
+       self._autoVoice[channel] = user
+       serverData.mode(channel, '+v', user)
+
+   def stopCmd(self, serverData, channel, user, args):
+       result = super(AutoVoiceDispatch, self).stopCmd(serverData, channel, user, args)
+       if not result:
+           return
+       if channel not in self._autoVoice:
+           return
+       logger.debug('remove role')
+       serverData.mode(channel, '-v', self._autoVoice[channel])
+       del self._autoVoice[channel]
