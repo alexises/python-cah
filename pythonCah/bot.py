@@ -16,7 +16,7 @@ class CahBot(MultiIrcClient):
         tokenToCheck = \
             self.config[server][destination].token
         logger.debug('{} {} {} {}'.format(
-          server, sender, destination, message))
+            server, sender, destination, message))
         token = message[0]
         chan = destination
         user = sender.split('!')[0]
