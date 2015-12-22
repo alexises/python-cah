@@ -5,7 +5,13 @@ python:
   - '3.5'
   - '3.5-dev'
   - 'nightly'
-install: "pip install -r requirement.txt"
+install: 
+ - "pip install -r requirement.txt"
+ - "pip install flake8"
+
+before_script:
+ - "flake8 ."
+
 script: coverage
 
 notifications:
