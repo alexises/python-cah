@@ -65,8 +65,8 @@ class BlackCard(object):
         return card filled with white proposition
         '''
         if len(value) != self.pick:
-            raise ValueError('bad number of white card, need ' + 
-                str(self.pick))
+            raise ValueError('bad number of white card, need ' +
+                             str(self.pick))
         # cards can have pick-1 filling token, we should manage this case
         sentanceNormalized = self.value + ' {}'
         valueNormalized = list(value)
@@ -117,7 +117,7 @@ class WhiteCardStack(CardStack):
             entryCount += 1
             if 'type' not in i or i['type'] != 'Answer':
                 logger.error('bad kind of responde, skip entry {0}',
-                     entryCount)
+                             entryCount)
                 continue
             if 'value' not in i:
                 logger.error('no value, skip entry {0}'.entryCount)
