@@ -21,6 +21,7 @@
      { "role" : "ROLE_PLAYER" },
      { "server" : "irc.iiens.net", "channel": "#cahBot", "nick" : "alexises", "role" : "ROLE_DEBUG" },
      { "server" : "irc.iiens.net", "channel": "#cahBot", "ircRole" : "+", "role" : "ROLE_ADMIN" },
+     { "server" : "irc.iiens.net", "channel": "#cahBot", "nick" : "alexises", "role" : "ROLE_INPERSONATE" },
      { "ircRole" : "&", "role" : "ROLE_DEBUG" },
      { "ircRole" : "~", "role" : "ROLE_ADMIN" },
      { "ircRole" : "@", "role" : "ROLE_ADMIN" },
@@ -34,6 +35,7 @@
      { "command" : "join", "role" : "ROLE_PLAYER" },
      { "command" : "pick", "role" : "ROLE_PLAYER" },
      { "command" : "force-start", "role": "ROLE_ADMIN" },
-     { "command" : "stop", "role" : "ROLE_ADMIN" }
+     { "command" : "stop", "role" : "ROLE_ADMIN" },
+     { "command" : "inpersonate", "role":  "ROLE_INPERSONATE"}
   ]
 }

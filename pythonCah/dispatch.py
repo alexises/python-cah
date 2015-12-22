@@ -4,6 +4,7 @@ from .game import CAHGame
 from .cards import MultiStack, BlackCardStack, WhiteCardStack
 logger = logging.getLogger(__name__)
 
+
 class CmdDispatch(object):
     def __init__(self, security):
         logger.debug('init CmdDispatch')
@@ -20,11 +21,13 @@ class CmdDispatch(object):
             return
         role = serverData.userList.getUserMode(channel, user)
         logger.debug('irc role : "{}"'.format(role))
-        if not self.security.authenticate(serverData.server, channel, user, role, command):
+        if not self.security.authenticate(
+            serverData.server, channel, user, role, command):
             logger.warning('no permission allowed to execute this command, skip')
             return
         callback = self.cmd[command]
         callback(serverData, channel, user, args)
+
 
 class BaseGameDispatch(CmdDispatch):
     def __init__(self, blackDeckFiles, whiteDeckFiles, security):
@@ -71,28 +74,63 @@ class BaseGameDispatch(CmdDispatch):
         del party
         return True
 
+
 class AutoVoiceDispatch(BaseGameDispatch):
-   def __init__(self, *args, **kargs):
-       super(AutoVoiceDispatch, self).__init__(*args, **kargs)
-       self._autoVoice = {}
+    def __init__(self, *args, **kargs):
+        super(AutoVoiceDispatch, self).__init__(*args, **kargs)
+        self._autoVoice = {}
+ 
+    def startCmd(self, serverData, channel, user, args):
+        result = super(AutoVoiceDispatch, self).startCmd(serverData, channel, user, args)
+        if not result:
+            return
+        mode = serverData.userList.getUserMode(channel, user)
+        if mode not in ['', ' ']:
+            #user already privilegied, skip
+            return
+        self._autoVoice[channel] = user
+        serverData.mode(channel, '+v', user)
 
-   def startCmd(self, serverData, channel, user, args):
-       result = super(AutoVoiceDispatch, self).startCmd(serverData, channel, user, args)
-       if not result:
-           return
-       mode = serverData.userList.getUserMode(channel, user)
-       if mode not in ['', ' ']:
-           #user already privilegied, skip
-           return
-       self._autoVoice[channel] = user
-       serverData.mode(channel, '+v', user)
+    def stopCmd(self, serverData, channel, user, args):
+        result = super(AutoVoiceDispatch, self).stopCmd(serverData, channel, user, args)
+        if not result:
+            return
+        if channel not in self._autoVoice:
+            return
+        logger.debug('remove role')
+        serverData.mode(channel, '-v', self._autoVoice[channel])
+        del self._autoVoice[channel]
 
-   def stopCmd(self, serverData, channel, user, args):
-       result = super(AutoVoiceDispatch, self).stopCmd(serverData, channel, user, args)
-       if not result:
-           return
-       if channel not in self._autoVoice:
-           return
-       logger.debug('remove role')
-       serverData.mode(channel, '-v', self._autoVoice[channel])
-       del self._autoVoice[channel]
+
+class InpersonateServerContainer(object):
+    def __init__(self, serverData, channel, user):
+        self.serverData = serverData
+        self.channel = channel
+        self.user = user
+    
+    def _getDestination(self, dest):
+        if dest[0] in ['&', '#']:
+            return dest
+        return self.user
+
+    def notice(self, dest, data):
+        realDest = self._getDestination(dest)
+        self.serverData.notice(realDest, data)
+
+    def privmsg(self, dest, data):
+        realDest = self._getDestination(dest)
+        self.serverData.privmsg(realDest, data)
+
+    def __getattr__(self, name):
+        return getattr(self.serverData, name)
+
+class InpersonateDispatch(AutoVoiceDispatch):
+    def __init__(self, *args, **kargs):
+        super(InpersonateDispatch, self).__init__(*args, **kargs)
+        self.appendCmd('inpersonate', self.inpersonateCmd)
+
+    def inpersonateCmd(self, serverData, channel, user, args):
+        inpersonateServerData = InpersonateServerContainer(serverData, channel, user)
+        user = args.pop(0)
+        command = args.pop(0)
+        self.dispatch(inpersonateServerData, channel, user, command, args)
