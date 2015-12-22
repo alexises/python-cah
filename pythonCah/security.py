@@ -3,8 +3,9 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+
 def authentication_from_config(authentication, authorization):
-    """ create authentication manager instance from two list of dict 
+    """ create authentication manager instance from two list of dict
         authentication : provides roles based on irc attribute
         authorization : provides allowed command from role
     """
@@ -17,6 +18,7 @@ def authentication_from_config(authentication, authorization):
 
     return author
 
+
 class AuthenticationManager(object):
     ALL_SERVER = ''
     ALL_CHANNEL = ''
@@ -27,6 +29,7 @@ class AuthenticationManager(object):
     HOP = '%'
     ADMIN = '&'
     FOUNDER = '~'
+
     def __init__(self):
         self.acl = []
 
@@ -51,6 +54,7 @@ class AuthenticationManager(object):
             groups.append(iappRole)
         logger.debug('all group : {}'.format(groups))
         return list(set(groups))
+
 
 class AuthorizationManager(object):
     def __init__(self, authenticationManager):

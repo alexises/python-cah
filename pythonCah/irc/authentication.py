@@ -4,8 +4,9 @@ import base64
 
 logger = logging.getLogger(__name__)
 
+
 class SaslCapableClient(IRCCapabilityNegociationIrcClient):
-    def __init__(self, *args, withSasl=False, password = '', **kargs):
+    def __init__(self, *args, withSasl=False, password='', **kargs):
         super(SaslCapableClient, self).__init__(*args, **kargs)
         self.password = password
         logger.debug('launch sasl capable client')
@@ -31,7 +32,7 @@ class SaslCapableClient(IRCCapabilityNegociationIrcClient):
             self.warning('sasl capability forbiden by server, end negociation')
             return
         self.debug('sasl capability correctly negociated')
-        
+
         self.sendCmd('AUTHENTICATE', 'PLAIN')
         (cmd, server, param) = self._getCommand()
         if cmd == '904':
@@ -43,12 +44,13 @@ class SaslCapableClient(IRCCapabilityNegociationIrcClient):
             self.sendCmd('AUTHENTICATE', '*')
             return
 
-        encodedPassword = base64.b64encode( self.nick + "\0" + self.nick + "\0" + self.password)
+        encodedPassword = base64.b64encode(
+            self.nick + "\0" + self.nick + "\0" + self.password)
         if encodedPassword > 400:
             raise NotImplemented('not able to cut password')
         logger.debug('send password')
-        seld.sendCmd('AUTHENTICATE', encodedPassword)
-        
+        self.sendCmd('AUTHENTICATE', encodedPassword)
+ 
         (cmd, server, param) = self._getCommand()
         if cmd == '904' or cmd == '905':
             logger.error('bad password')
@@ -60,4 +62,3 @@ class SaslCapableClient(IRCCapabilityNegociationIrcClient):
         else:
             logger.critical('bad command, skip it')
             return
-

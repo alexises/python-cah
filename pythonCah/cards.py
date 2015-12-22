@@ -28,6 +28,7 @@ class CardStack(object):
     def __len__(self):
         return len(self.stack)
 
+
 class MultiStack(CardStack):
     def __init__(self):
         super(MultiStack, self).__init__()
@@ -53,6 +54,7 @@ class MultiStack(CardStack):
     def pick(self):
         return super(MultiStack, self).pick().pick()
 
+
 class BlackCard(object):
     def __init__(self, value, pick):
         self.value = value
@@ -74,12 +76,14 @@ class BlackCard(object):
         param = ['____']*self.pick
         return self.printSentance(param)
 
+
 class WhiteCard(object):
     def __init__(self, value):
         self.value = value
 
     def __str__(self):
         return self.value
+
 
 class BlackCardStack(CardStack):
     def __init__(self, filename):
@@ -100,6 +104,7 @@ class BlackCardStack(CardStack):
                 logger.error('bad pick value, skip')
                 continue
             self.stack.append(BlackCard(i['value'], i['pick']))
+
 
 class WhiteCardStack(CardStack):
     def __init__(self, filename):

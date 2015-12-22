@@ -41,10 +41,10 @@ class Server(object):
                 logger.debug('return {}'.format(i.channel))
                 return i
         logger.warning('not a chennel, return default config')
-        channel = Channel({ 'token' : '', 'startTimeout' : 0 , 'pickTimeout' : 0})
+        channel = Channel({'token': '', 'startTimeout': 0, 'pickTimeout': 0})
         self._setDefaultChannelValue(channel)
         return channel
-        
+
     def getBasicParams(self):
         params = {}
         params['server'] = self.server
@@ -63,6 +63,7 @@ class Server(object):
 
         logger.debug('params : {}'.format(params))
         return params
+
 
 class Config(object):
     def __init__(self, data):
@@ -103,9 +104,11 @@ class Config(object):
             if i.port == port and i.server == server:
                 return i
 
+
 class RoleMappingSchema(Schema):
     command = fields.Str(required = True)
     role = fields.Str(required = True)
+
 
 class ACESchema(Schema):
     server = fields.Str(missing = AM.ALL_SERVER)
@@ -114,12 +117,14 @@ class ACESchema(Schema):
     ircRole = fields.Str(missing = AM.NO_ROLE, validate = validate.OneOf([AM.NO_ROLE, AM.VOICE, AM.HOP, AM.OP, AM.FOUNDER, AM.ADMIN]))
     role = fields.Str(required = True)
 
+
 class ChannelSchema(Schema):
     channel = fields.Str(required = True, validate = validate.Regexp(channelRegexp))
     token = fields.Str(missing = ' ', validate=validate.Length(min = 1, max = 1))
     startTimeout = fields.Integer(missing = 0, validate = validate.Range(min = 0, max = 300))
     pickTimeout = fields.Integer(missing = 0, validate = validate.Range(min = 0, max = 300))
     autoVoice = fields.Boolean(required = False)
+
 
 class ServerSchema(Schema):
     server = fields.Str(required=True)
@@ -138,6 +143,7 @@ class ServerSchema(Schema):
     password = fields.Str(missing = '')
     autoVoice = fields.Boolean(required = True)
 
+
 class ConfigSchema(Schema):
     ctcp = fields.Str(missing = "python-cah")
     nick = fields.Str(required = True, validate = validate.Regexp(ircNickRegexp))
@@ -154,6 +160,7 @@ class ConfigSchema(Schema):
     @post_load
     def hydrate(self, data):
         return Config(data)
+
 
 def loadConfig(filename):
     with open(filename) as fd:

@@ -2,13 +2,15 @@ import logging
 from pythonCah.irc.authentication import SaslCapableClient
 logger = logging.getLogger(__name__)
 
-VOICE = '+'             
+VOICE = '+'
 OP = '@'
 HOP = '%'
 FOUNDER = '~'
 ADMIN = '&'
 ALL_ROLE = [VOICE, OP, HOP, FOUNDER, ADMIN]
-ROLE_MAPPING = { 'o' : OP, 'v' : VOICE, 'h' : HOP, 'F' : FOUNDER, 'a' : ADMIN }
+ROLE_MAPPING = {'o': OP, 'v': VOICE, 'h': HOP, 'F': FOUNDER, 'a': ADMIN}
+
+
 class UserList(object):
     def __init__(self):
         self._channel = {}
@@ -52,6 +54,7 @@ class UserList(object):
         logger.debug('list for {}'.format(channel))
         for nick, mode in self._channel[channel].items():
              logger.debug('{}{}'.format(mode, nick))
+
 
 class AutoJoinIrcClient(SaslCapableClient):
     def __init__(self, *args, **kargs):

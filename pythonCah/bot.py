@@ -2,6 +2,7 @@ from pythonCah.irc.multiclient import MultiIrcClient
 import logging
 logger = logging.getLogger(__name__)
 
+
 class CahBot(MultiIrcClient):
     def __init__(self, config, dispatcher):
         self.config = config
@@ -12,7 +13,8 @@ class CahBot(MultiIrcClient):
         self.privmsg(server, sender, destination, message)
 
     def privmsg(self, server, sender, destination, message):
-        tokenToCheck = self.config[server][destination].token
+        tokenToCheck = 
+          self.config[server][destination].token
         logger.debug('{} {} {} {}'.format(server, sender, destination, message))
         token = message[0]
         chan = destination
@@ -20,15 +22,16 @@ class CahBot(MultiIrcClient):
         if destination[0] != '#':
             chan = ''
         logger.debug('new msg')
-        #we exclude token checking in case of private message
-        #we are not able to proper rely the good token to expect
+        # we exclude token checking in case of private message
+        # we are not able to proper rely the good token to expect
         if chan != '' and token != tokenToCheck:
             logger.debug('provided token {}, expected token {}'.format(token, tokenToCheck))
             logger.info('not a command, avoid')
             return
-        #filter empty component, like have two space
-        #between cmd arguments
-        cmdComponents = [_f for _f in message[1:].split(' ') if _f]
+        # filter empty component, like have two space
+        # between cmd arguments
+        componentsWithEmpty = message[1:].split(' ') 
+        cmdComponents = [c for c in componentsWithEmpty if c]
         if len(cmdComponents) < 1:
             logger.debug('only a token')
             return

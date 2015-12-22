@@ -18,6 +18,7 @@ _messageDelimiter = re.compile("\r|\n|\r\n")
 class SignalException(Exception):
     pass
 
+
 class IrcClient(object):
     def __init__(self, server, port, nick, ctcp, ident='', realname='', ssl=False, sslCheck=True):
         self.server = server
@@ -38,11 +39,11 @@ class IrcClient(object):
         self._events = {}
         self._events['PING'] = self._pong
         self._events['376'] = []
-        #end of motd
+        # end of motd
 
     def _bindSSL(self):
         ctx = ssl.create_default_context(ssl.Purpose.SERVER_AUTH)
-        #set strict security option
+        # set strict security option
         ctx.set_ciphers('DH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:ECDH+AES128:DH+AES:ECDH+3DES:DH+3DES:RSA+AESGCM:RSA+AES:RSA+3DES:!aNULL:!MD5:!DSS')
         ctx.options &= ssl.OP_NO_COMPRESSION
         if self.sslCheck:
@@ -72,8 +73,8 @@ class IrcClient(object):
         self._initialCmd()
         if self.ssl:
             #not yet available
-            #version = self._socket.version()
-            #logger.info('ssl version : {}'.format(version))
+            # version = self._socket.version()
+            # logger.info('ssl version : {}'.format(version))
             cipher = self._socket.cipher()
             logger.info('cipher : {}'.format(cipher))
             cert = self._socket.getpeercert()
@@ -135,7 +136,7 @@ class IrcClient(object):
         (rfd, wfd, efd) = select.select([self._socket, WAKEUP_FD_R], [], [])
         for fd in rfd:
             if fd == WAKEUP_FD_R:
-                #we have been waked up by an exception, rage quid
+                # we have been waked up by an exception, rage quid
                 logger.warning('an exception had just waked up, I stop running')
                 raise SignalException("I have been killed by another one")
         data = self._socket.recv(4*IRC_MSG_SIZE).decode('UTF-8')
@@ -144,7 +145,7 @@ class IrcClient(object):
         self._buffer = lines.pop()
         for line in lines:
             if line == '':
-                #due to regexp biavior, we can have empty line
+                # due to regexp biavior, we can have empty line
                 continue
             self._lines.append(line)
         return self._computeMsg(self._lines.pop(0))
@@ -162,7 +163,7 @@ class IrcClient(object):
                 except TypeError:
                     self._events[cmd](cmd, server, param)
                 except KeyError:
-                    #no event, just skip it
+                    # no event, just skip it
                     pass
         except SignalException:
             self._handleSignal()

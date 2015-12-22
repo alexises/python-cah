@@ -5,6 +5,7 @@ from threading import Thread
 from queue import Queue
 logger = logging.getLogger(__name__)
 
+
 class NonBlockingIrcClient(AutoJoinIrcClient):
     def __init__(self, *args, **kargs):
         super(NonBlockingIrcClient, self).__init__(*args, **kargs)
@@ -13,6 +14,7 @@ class NonBlockingIrcClient(AutoJoinIrcClient):
 
     def start(self):
         self._thread.start()
+
 
 class IrcClientNode(NonBlockingIrcClient):
     def __init__(self, queue, *args, **kargs):
