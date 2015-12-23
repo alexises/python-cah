@@ -25,13 +25,13 @@ def main():
     d1 = MultiStack()
     c1.addFiles(glob('./cards/*_q.json'), BlackCardStack)
     d1.addFiles(glob('./cards/*_a.json'), WhiteCardStack)
-    for i in range(0,5):
+    for i in range(0, 5):
         white = d1.pick()
         black = c1.pick()
-        print white
-        print black.printEmpty()
+        print(white)
+        print(black.printEmpty())
         if black.pick == 1:
-            print black.printSentance(white)
+            print(black.printSentance(white))
 
 if __name__ == "__main__":
     main()

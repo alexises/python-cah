@@ -26,7 +26,7 @@ class Player(object):
             elem += 1
             msg += '[{}] {} '.format(elem, card)
         serverData.privmsg(self.nick, msg)
- 
+
     def removeCards(self, cards):
         cards.sort()
         for index, value in enumerate(cards):
@@ -44,7 +44,7 @@ class PlayedCards(object):
 
     def append(self, idx, nick, cards):
         logger.debug('{} ({}) had played {}'.format(nick, idx, cards))
-        self.heap.append({ 'nick': nick, 'id': idx, 'cards': cards })
+        self.heap.append({'nick': nick, 'id': idx, 'cards': cards})
 
     def shuffle(self):
         shuffle(self.heap)
@@ -57,6 +57,7 @@ class PlayedCards(object):
 
     def __len__(self):
         return len(self.heap)
+
 
 class CAHGameUtils(object):
     '''
@@ -145,10 +146,10 @@ class CAHGame(CAHGameUtils):
 
         self.czar = (self.czar + 1) % len(self.players)
         self._say(i18n.czar.format(self.players[self.czar].nick))
-        
+
         self.currentBlackCard = self.blackCardStack.pick()
         self._say(i18n.blackCardIs + self.currentBlackCard.printEmpty())
-        
+
         for player in self.players:
             if player == self.players[self.czar]:
                 continue
@@ -160,7 +161,6 @@ class CAHGame(CAHGameUtils):
             self.state = 'WAIT_WHITE'
         self.currentTimer = Timer(60, self._endWaitWhiteCard)
         self.currentTimer.start()
-
 
     def _playWhiteCards(self, serverData, channel, user, args):
         ''' 5) play white card '''
@@ -174,7 +174,7 @@ class CAHGame(CAHGameUtils):
             if checkedPlayer.nick == user:
                 player = checkedPlayer
                 break
-        if player == None:
+        if player is None:
             logger.debug('not a player is currently play')
             return
         if self.playedCards.search(user):
@@ -186,20 +186,21 @@ class CAHGame(CAHGameUtils):
             return
 
         if len(args) != self.currentBlackCard.pick:
-            logger.warning('played {} white card, need {}'.format(len(args), self.currentBlackCard.pick))
-            self._privateSay(user, i18n.badNumberOfCards.format(user, self.currentBlackCard.pick))
+            nbNeededCards = self.currentBlackCard.pick
+            logger.warning('played {} white card, need {}'.format(len(args), nbNeededCards))
+            self._privateSay(user, i18n.badNumberOfCards.format(user, nbNeededCards))
             return
         cards = []
         realArgs = []
         try:
             for i in args:
                 idx = int(i)
-                if idx > (9+ self.currentBlackCard.pick):
+                if idx > (9 + nbNeededCards):
                     raise ValueError('')
                 realArgs.append(idx - 1)
                 cards.append(player.heap[idx])
         except ValueError:
-            self._privateSay(user, i18n.cardOutOfRange.format(9+self.currentBlackCard.pick))
+            self._privateSay(user, i18n.cardOutOfRange.format(9+nbNeeededCards))
 
         player.removeCards(realArgs)
         self.playedCards.append(idxPlayer, user, cards)
@@ -253,11 +254,11 @@ class CAHGame(CAHGameUtils):
 
         winner = self.playedCards.heap[card - 1]
         self.players[winner['id']].score += 1
-     
+
         whiteCards = winner['cards']
         sentance = self.currentBlackCard.printSentance(whiteCards)
         self._say(i18n.winner.format(winner['nick'], sentance))
-        
+
         self._sayScore()
         self._beginTurn()
 
@@ -274,7 +275,7 @@ class CAHGame(CAHGameUtils):
                 return
 
     def scoreCmd(self, serverData, channel, user, args):
-        ''' 
+        '''
         scoreCmd : print the current score
         '''
         self._sayScore()
@@ -288,7 +289,7 @@ class CAHGame(CAHGameUtils):
             if checkedPlayer.nick == user:
                 player = checkedPlayer
                 break
-        if player == None:
+        if player is None:
             return
         player.sayGame(serverData)
 
@@ -298,12 +299,13 @@ class CAHGame(CAHGameUtils):
         '''
         logger.info('force start-engaged')
         if self.state != 'WAIT_PEOPLE':
-            logger.error('bad state for use force-start, we are on {}, expect WAIT_PEOPLE'.format(self.state))
+            logger.error('bad state for use force-start, we are on {}, ' + 
+                         'expect WAIT_PEOPLE'.format(self.state))
             return
         if len(self.players) < 3:
             self._say(i18n.cantStartYet.format(len(self.players)))
         self.currentTimer.cancel()
-        self._endWaitPeople() 
+        self._endWaitPeople()
 
     def start(self, nick):
         logger.info('new game on channel ' + self.channel)

@@ -21,7 +21,7 @@ class CmdDispatch(object):
             return
         role = serverData.userList.getUserMode(channel, user)
         logger.debug('irc role : "{}"'.format(role))
-        if not self.security.authenticate(serverData.server, channel, 
+        if not self.security.authenticate(serverData.server, channel,
                                           user, role, command):
             logger.warning('no permission allowed to execute this command,' +
                            ' skip')
@@ -83,7 +83,8 @@ class AutoVoiceDispatch(BaseGameDispatch):
         self._autoVoice = {}
 
     def startCmd(self, serverData, channel, user, args):
-        result = super(AutoVoiceDispatch, self).startCmd(serverData, channel, user, args)
+        result = super(AutoVoiceDispatch, self).startCmd(serverData, channel,
+                                                         user, args)
         if not result:
             return
         mode = serverData.userList.getUserMode(channel, user)
@@ -94,7 +95,7 @@ class AutoVoiceDispatch(BaseGameDispatch):
         serverData.mode(channel, '+v', user)
 
     def stopCmd(self, serverData, channel, user, args):
-        result = super(AutoVoiceDispatch, self).stopCmd(serverData, channel, 
+        result = super(AutoVoiceDispatch, self).stopCmd(serverData, channel,
                                                         user, args)
         if not result:
             return

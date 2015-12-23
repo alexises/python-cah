@@ -63,7 +63,7 @@ class AuthorizationManager(object):
     def __init__(self, authenticationManager):
         self.acl = {}
         self.authenticationManager = authenticationManager
- 
+
     def add(self, command, role):
         logger.debug('add acl {} {}'.format(command, role))
         if command not in self.acl:
@@ -72,7 +72,8 @@ class AuthorizationManager(object):
 
     def authenticate(self, server, channel,
                      nick, ircRole, command):
-        roles = self.authenticationManager.getRole(server, channel, nick, ircRole)
+        roles = self.authenticationManager.getRole(server, channel,
+                                                   nick, ircRole)
         neededRole = self.acl[command]
         logger.debug('neededRole : {}'.format(neededRole))
         logger.debug('roles : {}'.format(roles))

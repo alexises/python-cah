@@ -15,6 +15,7 @@ IRC_MSG_SIZE = 512
 # or carrage return
 _messageDelimiter = re.compile("\r|\n|\r\n")
 
+
 class SignalException(Exception):
     pass
 
@@ -45,8 +46,8 @@ class IrcClient(object):
     def _bindSSL(self):
         ctx = ssl.create_default_context(ssl.Purpose.SERVER_AUTH)
         # set strict security option
-        ctx.set_ciphers('DH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:' +\
-                        'ECDH+AES128:DH+AES:ECDH+3DES:DH+3DES:RSA+AESGCM:' +\
+        ctx.set_ciphers('DH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:' +
+                        'ECDH+AES128:DH+AES:ECDH+3DES:DH+3DES:RSA+AESGCM:' +
                         'RSA+AES:RSA+3DES:!aNULL:!MD5:!DSS')
         ctx.options &= ssl.OP_NO_COMPRESSION
         if self.sslCheck:
@@ -62,13 +63,13 @@ class IrcClient(object):
                                        server_hostname=self.server)
 
     def connect(self):
-        for res in socket.getaddrinfo(self.server, self.port, 
+        for res in socket.getaddrinfo(self.server, self.port,
                                       socket.AF_UNSPEC, socket.SOCK_STREAM):
             af, socktype, proto, canonname, sa = res
             try:
                 self._socket = socket.socket(af, socktype, proto)
                 break
-            except socket.error as msg:
+            except socket.error:
                 self._socket = None
         if self.ssl:
             self._bindSSL()
@@ -110,8 +111,8 @@ class IrcClient(object):
     def sendCmd(self, cmd, args):
         msg = cmd + ' ' + args + '\r\n'
         if len(msg) > IRC_MSG_SIZE:
-            raise ValueError('msg max size is {}, current message have {} size'.format(IRC_MSG_SIZE, len(msg)))
-
+            raise ValueError('msg max size is {}, current message ' +
+                             'have {} size'.format(IRC_MSG_SIZE, len(msg)))
         logger.debug(msg)
         self._socket.sendall(bytes(msg, 'UTF-8'))
 
@@ -141,12 +142,13 @@ class IrcClient(object):
         (rfd, wfd, efd) = select.select([self._socket, WAKEUP_FD_R], [], [])
         for fd in rfd:
             if fd == WAKEUP_FD_R:
-                # we have been waked up by an exception, rage quid
+                # we have been waked up by an exception,
+                # rage quit
                 logger.warning('an exception had just waked up, I stop running')
                 raise SignalException("I have been killed by another one")
         data = self._socket.recv(4*IRC_MSG_SIZE).decode('UTF-8')
         lines = _messageDelimiter.split(self._buffer + data)
-        
+
         self._buffer = lines.pop()
         for line in lines:
             if line == '':

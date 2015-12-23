@@ -108,7 +108,7 @@ class AutoJoinIrcClient(SaslCapableClient):
             self.userList.mode(channel, nick, mode)
         except IndexError:
             pass
- 
+
     def addChannel(self, channel):
         if channel[0] != '#':
             raise ValueError('not a valid irc channel')

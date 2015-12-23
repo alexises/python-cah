@@ -3,6 +3,8 @@ import logging
 import sys
 
 logger = logging.getLogger(__name__)
+
+
 def test():
     logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
     logger.info('start app')
@@ -13,7 +15,7 @@ def test():
                     'ctcp': 'cahBot',
                     'channels': ['#jeux', '#cahBot'],
                     'ssl': True,
-                    'sslCheck': False })
+                    'sslCheck': False})
     logger.debug('{}'.format(servers))
     item = MultiIrcClient(servers)
     item.start()
