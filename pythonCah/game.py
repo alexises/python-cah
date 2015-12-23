@@ -190,7 +190,7 @@ class CAHGame(CAHGameUtils):
             logger.warning('played {} white card, need {}'
                            .format(len(args), nbNeededCards))
             self._privateSay(user, i18n.badNumberOfCards.
-                                   format(user, nbNeededCards))
+                             format(user, nbNeededCards))
             return
         cards = []
         realArgs = []
