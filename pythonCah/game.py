@@ -164,8 +164,8 @@ class CAHGame(CAHGameUtils):
 
     def _playWhiteCards(self, serverData, channel, user, args):
         ''' 5) play white card '''
-        logger.info('{} is playing white cards {}'.format(user, args))
-
+        logger.info('{} is playing white cards {}'\
+            .format(user, args))
         logger.debug('search for player')
         player = None
         idxPlayer = -1
@@ -187,7 +187,8 @@ class CAHGame(CAHGameUtils):
 
         if len(args) != self.currentBlackCard.pick:
             nbNeededCards = self.currentBlackCard.pick
-            logger.warning('played {} white card, need {}'.format(len(args), nbNeededCards))
+            logger.warning('played {} white card, need {}'\
+                .format(len(args),nbNeededCards))
             self._privateSay(user, i18n.badNumberOfCards.format(user, nbNeededCards))
             return
         cards = []
@@ -200,7 +201,7 @@ class CAHGame(CAHGameUtils):
                 realArgs.append(idx - 1)
                 cards.append(player.heap[idx])
         except ValueError:
-            self._privateSay(user, i18n.cardOutOfRange.format(9+nbNeeededCards))
+            self._privateSay(user, i18n.cardOutOfRange.format(9+nbNeededCards))
 
         player.removeCards(realArgs)
         self.playedCards.append(idxPlayer, user, cards)
@@ -299,7 +300,7 @@ class CAHGame(CAHGameUtils):
         '''
         logger.info('force start-engaged')
         if self.state != 'WAIT_PEOPLE':
-            logger.error('bad state for use force-start, we are on {}, ' + 
+            logger.error('bad state for use force-start, we are on {}, ' +
                          'expect WAIT_PEOPLE'.format(self.state))
             return
         if len(self.players) < 3:

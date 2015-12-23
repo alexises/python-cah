@@ -129,7 +129,6 @@ class IrcClient(object):
         cmd = param[0]
         param = param[1:] + [longParam]
         logger.debug("server '{}' cmd '{}' param '{}'".format(server, cmd, param)) 
-        
         return (cmd, server, param)
 
     def _pong(self, cmd, server, param):
@@ -144,7 +143,8 @@ class IrcClient(object):
             if fd == WAKEUP_FD_R:
                 # we have been waked up by an exception,
                 # rage quit
-                logger.warning('an exception had just waked up, I stop running')
+                logger.warning('an exception had just waked up,' +
+                               'I stop running')
                 raise SignalException("I have been killed by another one")
         data = self._socket.recv(4*IRC_MSG_SIZE).decode('UTF-8')
         lines = _messageDelimiter.split(self._buffer + data)
