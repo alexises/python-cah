@@ -33,9 +33,10 @@ class AuthenticationManager(object):
     def __init__(self):
         self.acl = []
 
-    def addAcl(self, role, server=ALL_SERVER, channel=ALL_CHANNEL, 
+    def addAcl(self, role, server=ALL_SERVER, channel=ALL_CHANNEL,
                nick=ALL_NICK, ircRole=NO_ROLE):
-        logger.debug('add acl {} {} {} {} {}'.format(server, channel, nick, ircRole, role))
+        logger.debug('add acl {} {} {} {} {}'.format(server, channel, nick,
+                                                     ircRole, role))
         acl = (server, channel, nick, ircRole, role)
         self.acl.append(acl)
 
@@ -50,7 +51,9 @@ class AuthenticationManager(object):
                 continue
             if ircRole != iircRole and iircRole != self.NO_ROLE:
                 continue
-            logger.info('mached acl {} {} {} {} {}'.format(iserver, ichannel, inick, iircRole, iappRole))
+            logger.info('mached acl {} {} {} {} {}'.format(iserver, ichannel,
+                                                           inick, iircRole,
+                                                           iappRole))
             groups.append(iappRole)
         logger.debug('all group : {}'.format(groups))
         return list(set(groups))
@@ -60,19 +63,20 @@ class AuthorizationManager(object):
     def __init__(self, authenticationManager):
         self.acl = {}
         self.authenticationManager = authenticationManager
-   
+ 
     def add(self, command, role):
-        logger.debug('add acl {} {}'.format(command, role)) 
+        logger.debug('add acl {} {}'.format(command, role))
         if command not in self.acl:
             self.acl[command] = []
         self.acl[command].append(role)
 
-    def authenticate(self, server, channel, nick, ircRole, command):
+    def authenticate(self, server, channel,
+                     nick, ircRole, command):
         roles = self.authenticationManager.getRole(server, channel, nick, ircRole)
         neededRole = self.acl[command]
         logger.debug('neededRole : {}'.format(neededRole))
         logger.debug('roles : {}'.format(roles))
-        if neededRole == [] or neededRole == None:
+        if neededRole == [] or neededRole is None:
             return True
         matchedRole = list(set(roles).intersection(neededRole))
         if matchedRole == []:

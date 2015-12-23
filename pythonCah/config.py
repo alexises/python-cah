@@ -114,9 +114,9 @@ class RoleMappingSchema(Schema):
 
 class ACESchema(Schema):
     server = fields.Str(missing=AM.ALL_SERVER)
-    channel = fields.Str(missing=AM.ALL_CHANNEL) 
+    channel = fields.Str(missing=AM.ALL_CHANNEL)
     nick = fields.Str(missing=AM.ALL_NICK)
-    ircRole = fields.Str(missing=AM.NO_ROLE, 
+    ircRole = fields.Str(missing=AM.NO_ROLE,
                          validate=validate.OneOf([
                              AM.NO_ROLE,
                              AM.VOICE,
@@ -134,7 +134,7 @@ class ChannelSchema(Schema):
                        validate=validate.Length(min=1, max=1))
     startTimeout = fields.Integer(missing=0,
                                   validate=validate.Range(min=0, max=300))
-    pickTimeout = fields.Integer(missing=0, 
+    pickTimeout = fields.Integer(missing=0,
                                  validate=validate.Range(min=0, max=300))
     autoVoice = fields.Boolean(required=False)
 
@@ -145,7 +145,7 @@ class ServerSchema(Schema):
                           validate=validate.Range(min=1, max=65535))
     token = fields.Str(missing=' ',
                        validate=validate.Length(min=1, max=1))
-    startTimeout = fields.Integer(missing=0, 
+    startTimeout = fields.Integer(missing=0,
                                   validate=validate.Range(min=0, max=300))
     pickTimeout = fields.Integer(missing=0,
                                  validate=validate.Range(min=0, max=300))
@@ -164,7 +164,7 @@ class ServerSchema(Schema):
 
 class ConfigSchema(Schema):
     ctcp = fields.Str(missing="python-cah")
-    nick = fields.Str(required=True, 
+    nick = fields.Str(required=True,
                       validate=validate.Regexp(ircNickRegexp))
     ident = fields.Str(missing='')
     realname = fields.Str(missing='')
@@ -191,4 +191,4 @@ def loadConfig(filename):
     result = schema.load(data)
     if len(result.errors) > 1:
         raise ValueError(result.errors)
-    return result.data 
+    return result.data

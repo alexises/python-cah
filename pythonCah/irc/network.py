@@ -1,4 +1,4 @@
-from pprint import pformat 
+from pprint import pformat
 import logging
 import socket
 import ssl
@@ -10,9 +10,9 @@ logger = logging.getLogger(__name__)
 
 (WAKEUP_FD_R, WAKEUP_FD_W) = os.pipe()
 IRC_MSG_SIZE = 512
-#as python-ircclient, some server seen to not folow
-#the IRC rfc and end message only with line field
-#or carrage return
+# as python-ircclient, some server seen to not folow
+# the IRC rfc and end message only with line field
+# or carrage return
 _messageDelimiter = re.compile("\r|\n|\r\n")
 
 class SignalException(Exception):
@@ -20,7 +20,8 @@ class SignalException(Exception):
 
 
 class IrcClient(object):
-    def __init__(self, server, port, nick, ctcp, ident='', realname='', ssl=False, sslCheck=True):
+    def __init__(self, server, port, nick, ctcp,
+                 ident='', realname='', ssl=False, sslCheck=True):
         self.server = server
         self.port = port
         self.nick = nick
@@ -30,10 +31,10 @@ class IrcClient(object):
         self.realname = realname
         self.ctcp = ctcp
         if ident == '':
-           self.ident = self.nick
+            self.ident = self.nick
         if realname == '':
-           self.realname = self.ctcp
-           
+            self.realname = self.ctcp
+
         self._buffer = ''
         self._lines = []
         self._events = {}
@@ -44,7 +45,9 @@ class IrcClient(object):
     def _bindSSL(self):
         ctx = ssl.create_default_context(ssl.Purpose.SERVER_AUTH)
         # set strict security option
-        ctx.set_ciphers('DH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:ECDH+AES128:DH+AES:ECDH+3DES:DH+3DES:RSA+AESGCM:RSA+AES:RSA+3DES:!aNULL:!MD5:!DSS')
+        ctx.set_ciphers('DH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:' +\
+                        'ECDH+AES128:DH+AES:ECDH+3DES:DH+3DES:RSA+AESGCM:' +\
+                        'RSA+AES:RSA+3DES:!aNULL:!MD5:!DSS')
         ctx.options &= ssl.OP_NO_COMPRESSION
         if self.sslCheck:
             logger.debug('ssl check required')
@@ -55,11 +58,12 @@ class IrcClient(object):
             logger.debug('no certificate check')
             ctx.check_hostname = False
             ctx.verify_mode = ssl.CERT_NONE
-        self._socket = ctx.wrap_socket(self._socket, 
+        self._socket = ctx.wrap_socket(self._socket,
                                        server_hostname=self.server)
 
     def connect(self):
-        for res in socket.getaddrinfo(self.server, self.port, socket.AF_UNSPEC, socket.SOCK_STREAM):
+        for res in socket.getaddrinfo(self.server, self.port, 
+                                      socket.AF_UNSPEC, socket.SOCK_STREAM):
             af, socktype, proto, canonname, sa = res
             try:
                 self._socket = socket.socket(af, socktype, proto)
@@ -72,7 +76,7 @@ class IrcClient(object):
         logger.debug('we have connectioon, begin loop')
         self._initialCmd()
         if self.ssl:
-            #not yet available
+            # not yet available
             # version = self._socket.version()
             # logger.info('ssl version : {}'.format(version))
             cipher = self._socket.cipher()
@@ -83,11 +87,12 @@ class IrcClient(object):
 
     def _initialCmd(self):
         self.sendCmd('NICK', self.nick)
-        self.sendCmd('USER', '{0} {1} {1} :{2}'.format(self.nick, self.server, self.realname))
+        self.sendCmd('USER', '{0} {1} {1} :{2}'.format(self.nick, self.server,
+                                                       self.realname))
 
     def notice(self, dest, message):
         self.sendCmd('NOTICE', dest + ' :' + message)
-   
+
     def privmsg(self, dest, message):
         self.sendCmd('PRIVMSG', dest + ' :' + message)
 

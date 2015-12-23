@@ -50,7 +50,7 @@ class SaslCapableClient(IRCCapabilityNegociationIrcClient):
             raise NotImplemented('not able to cut password')
         logger.debug('send password')
         self.sendCmd('AUTHENTICATE', encodedPassword)
- 
+
         (cmd, server, param) = self._getCommand()
         if cmd == '904' or cmd == '905':
             logger.error('bad password')

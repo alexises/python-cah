@@ -95,8 +95,8 @@ class BlackCardStack(CardStack):
             entryCount += 1
             # check entry
             if 'type' not in i or i['type'] != 'Question':
-                logger.error('bad kind of question, skip entry {0}', 
-                    entryCount)
+                logger.error('bad kind of question, skip entry {0}',
+                             entryCount)
                 continue
             if 'value' not in i:
                 logger.error('no value, skip entry {0}', entryCount)

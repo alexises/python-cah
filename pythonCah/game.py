@@ -4,6 +4,7 @@ from random import shuffle
 from . import i18n
 logger = logging.getLogger(__name__)
 
+
 class Player(object):
     '''
     Player, store information about a player profile
@@ -31,6 +32,7 @@ class Player(object):
         for index, value in enumerate(cards):
             del self.heap[value - index]
 
+
 class PlayedCards(object):
     '''
     PlayerCards : store and manage cards played during a round
@@ -42,7 +44,7 @@ class PlayedCards(object):
 
     def append(self, idx, nick, cards):
         logger.debug('{} ({}) had played {}'.format(nick, idx, cards))
-        self.heap.append({ 'nick' : nick, 'id' : idx, 'cards' : cards })
+        self.heap.append({ 'nick': nick, 'id': idx, 'cards': cards })
 
     def shuffle(self):
         shuffle(self.heap)
@@ -86,7 +88,8 @@ class CAHGameUtils(object):
 
 
 class CAHGame(CAHGameUtils):
-    def __init__(self, dispatch, channel, serverData, blackCardStack, whiteCardStack):
+    def __init__(self, dispatch, channel, serverData,
+                 blackCardStack, whiteCardStack):
         super(CAHGame, self).__init__(serverData, channel)
         self.state = 'NOT_RUNNING'
         self.lockState = RLock()
@@ -216,7 +219,7 @@ class CAHGame(CAHGameUtils):
 
     def _beginCzarTurn(self, normalEnd=True):
         ''' 7) show all proposition and wait for the czar decision '''
-        #if all people have play before the end of the timer we should stop it
+        # if all people have play before the end of the timer we should stop it
         with self.lockState:
             self.state = 'WAIT_CZAR'
             if normalEnd:
@@ -224,7 +227,8 @@ class CAHGame(CAHGameUtils):
 
         self.playedCards.shuffle()
         for index, card in enumerate(self.playedCards.heap):
-            self._say('[{}] {}'.format(index + 1, self.currentBlackCard.printSentance(card['cards'])))
+            sentance = self.currentBlackCard.printSentance(card['cards'])
+            self._say('[{}] {}'.format(index + 1, sentance))
         self._say(i18n.czarPick.format(self.players[self.czar].nick))
 
     def _selectWinner(self, serverData, channel, user, args):
@@ -260,10 +264,10 @@ class CAHGame(CAHGameUtils):
     def pickCmd(self, serverData, channel, user, args):
         with self.lockState:
             if self.state == 'WAIT_WHITE':
-                #we are on step 5
+                # we are on step 5
                 self._playWhiteCards(serverData, channel, user, args)
             elif self.state == 'WAIT_CZAR':
-                #we are on step 8
+                # we are on step 8
                 self._selectWinner(serverData, channel, user, args)
             else:
                 logger.warning('command used in bad context')

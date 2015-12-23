@@ -16,8 +16,8 @@ class IRCCapabilityNegociationIrcClient(IrcClient):
 
     def _capNegociation(self, cmd, server, param):
         try:
-            cmd = param[1]
-            capList = param[2]     
+            # cmd = param[1]
+            capList = param[2]
         except IndexError:
             pass
         else:

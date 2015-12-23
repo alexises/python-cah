@@ -48,12 +48,12 @@ class UserList(object):
         if modifier == '+':
             self._channel[channel][nick] = ROLE_MAPPING[modeItem]
         elif modifier == '-':
-            self._channel[channel][nick] = '' 
+            self._channel[channel][nick] = ''
 
     def listLog(self, channel):
         logger.debug('list for {}'.format(channel))
         for nick, mode in self._channel[channel].items():
-             logger.debug('{}{}'.format(mode, nick))
+            logger.debug('{}{}'.format(mode, nick))
 
 
 class AutoJoinIrcClient(SaslCapableClient):
@@ -72,7 +72,7 @@ class AutoJoinIrcClient(SaslCapableClient):
         channel = args[-2]
         for nick in args[-1].split(' '):
             if len(nick) < 1:
-               continue
+                continue
             if nick[0] in ALL_ROLE:
                 role = nick[0]
                 nick = nick[1:]
@@ -108,7 +108,7 @@ class AutoJoinIrcClient(SaslCapableClient):
             self.userList.mode(channel, nick, mode)
         except IndexError:
             pass
-        
+ 
     def addChannel(self, channel):
         if channel[0] != '#':
             raise ValueError('not a valid irc channel')

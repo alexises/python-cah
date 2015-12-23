@@ -10,7 +10,8 @@ badNumberOfCards = '{}: you should pick {} cards'
 cardOutOfRange = 'argument should be number between 1 and {}'
 pickAck = 'ok, your turn is in the machine'
 timeoutWhiteCard1 = 'timeout for playing white card is expired'
-timeoutWhiteCard2 = "peoples that haven't played are disquilified for this turn" 
+timeoutWhiteCard2 = "peoples that haven't played are disquilified" +
+                    'for this turn'
 czarPick = '{} : please choose your sentance with !pick <number>'
 notTheCzar = "{}, your are not the czar and can't play yet"
 pickUsage = "{}, usage: !pick <#>"

@@ -6,7 +6,7 @@ def prepareLogging(loggingLevel):
     logger = logging.getLogger()
     logger.setLevel(loggingLevel)
 
-    formatStr = 
+    formatStr = \
         '%(asctime)s [%(levelname)-8s] %(filename)s:%(lineno)s %(message)s'
     formater = logging.Formatter(formatStr, '%H:%M:%S')
 

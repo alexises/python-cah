@@ -1,4 +1,3 @@
-import logging
 from pythonCah.irc.channelInfo import AutoJoinIrcClient
 import logging
 from threading import Thread
@@ -9,7 +8,7 @@ logger = logging.getLogger(__name__)
 class NonBlockingIrcClient(AutoJoinIrcClient):
     def __init__(self, *args, **kargs):
         super(NonBlockingIrcClient, self).__init__(*args, **kargs)
-        self._thread = Thread(target = self.connect )
+        self._thread = Thread(target=self.connect)
         self._thread.daemon = True
 
     def start(self):
@@ -28,7 +27,8 @@ class IrcClientNode(NonBlockingIrcClient):
 
     def _passEventInQueue(self, cmd, sender, param):
         self._queue.put((self, cmd, sender, param))
-    
+
+
 class MultiIrcClient(object):
     def __init__(self, servers):
         self._servers = []
@@ -40,7 +40,7 @@ class MultiIrcClient(object):
             self._servers.append(client)
             for i in channels:
                 client.addChannel(i)
-            
+
         self.command = {}
         self.command['NOTICE'] = self.notice
         self.command['PRIVMSG'] = self.privmsg
@@ -48,7 +48,7 @@ class MultiIrcClient(object):
     def privmsg(self, server, sender, destination, message):
         logger.debug('privmsg')
         pass
-    
+
     def notice(self, server, sender, destination, message):
         logger.debug('notice')
         pass
