@@ -2,7 +2,7 @@ from config import nick, server, port, chan, ctcp, token
 import logging
 import sys
 from glob import glob
-from cards import BlackCardStack, WhiteCardStack
+from cards import BlackCardStack, WhiteCardStack, MultiStack
 logger = logging.getLogger(__name__)
 
 

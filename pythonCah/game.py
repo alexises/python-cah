@@ -164,8 +164,8 @@ class CAHGame(CAHGameUtils):
 
     def _playWhiteCards(self, serverData, channel, user, args):
         ''' 5) play white card '''
-        logger.info('{} is playing white cards {}'\
-            .format(user, args))
+        logger.info('{} is playing white cards {}'
+                    .format(user, args))
         logger.debug('search for player')
         player = None
         idxPlayer = -1
@@ -187,9 +187,10 @@ class CAHGame(CAHGameUtils):
 
         if len(args) != self.currentBlackCard.pick:
             nbNeededCards = self.currentBlackCard.pick
-            logger.warning('played {} white card, need {}'\
-                .format(len(args),nbNeededCards))
-            self._privateSay(user, i18n.badNumberOfCards.format(user, nbNeededCards))
+            logger.warning('played {} white card, need {}'
+                           .format(len(args), nbNeededCards))
+            self._privateSay(user, i18n.badNumberOfCards.
+                                   format(user, nbNeededCards))
             return
         cards = []
         realArgs = []

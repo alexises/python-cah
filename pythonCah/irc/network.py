@@ -128,7 +128,8 @@ class IrcClient(object):
         param = list(filter(len, component[0].split(' ')))
         cmd = param[0]
         param = param[1:] + [longParam]
-        logger.debug("server '{}' cmd '{}' param '{}'".format(server, cmd, param)) 
+        logger.debug("server '{}' cmd '{}' param '{}'"
+                     .format(server, cmd, param))
         return (cmd, server, param)
 
     def _pong(self, cmd, server, param):
