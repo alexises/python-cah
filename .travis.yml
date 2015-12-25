@@ -7,11 +7,18 @@ python:
 install: 
  - "pip install -r requirement.txt"
  - "pip install flake8"
+ - "pip install codecov"
+
+after_success:
+  - codecov
 
 before_script:
  - "flake8 ."
 
 script: coverage
+
+after_success:
+  - codecov
 
 notifications:
   email: false
