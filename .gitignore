@@ -1,3 +1,6 @@
 *.pyc
 *.pyo
 pwd
+.eggs/
+build/
+python_cah.egg-info/
