@@ -9,5 +9,4 @@ setup(name='python-cah',
       packages=['pythonCah', 'pythonCah.irc'],
       install_requires=['marshmallow'],
       tests_require=['pytest'],
-      setup_requires=['pytest-runner']
-)
+      setup_requires=['pytest-runner'])
