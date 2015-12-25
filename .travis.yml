@@ -23,7 +23,13 @@ after_success:
 
 notifications:
   email: false
+  irc:
+    channels:
+      - "irc.iiens.net#cahBot"
+    template:
+      - "%{commit} : %{message}, Build status : %{build_url}"
 
 branches:
   only:
     - master
+
