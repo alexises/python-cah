@@ -11,6 +11,6 @@ def test_unavailableFile():
     with pytest.raises(FileNotFoundError):
         loadConfig('jdt/notAFile.json')
 
+
 def test_minimalConfig():
     loadConfig('jdt/minimalConfig.json')
-
