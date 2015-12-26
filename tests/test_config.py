@@ -22,13 +22,14 @@ def test_minimalConfig():
     assert params['nick'] == 'nono-devel'
     assert params['ctcp'] == "I'm a dunny bot under devel"
     assert params['realname'] == ''
-    assert params['ssl'] == False
-    assert params['sslCheck'] == True
-    assert params['withSasl'] == False
+    assert params['ssl'] is False
+    assert params['sslCheck'] is True
+    assert params['withSasl'] is False
     assert params['password'] == ''
     assert len(params['channels']) == 1
     channel = params['channels'][0]
     assert channel == '#cahbot2'
+
 
 def test_channelDefaultValuePropagate():
     c = loadConfig('jdt/minimalConfig.json')
@@ -42,6 +43,4 @@ def test_channelDefaultValuePropagate():
     assert server.pickTimeout == 60
     assert channel.startTimeout == 60
     assert channel.pickTimeout == 60
-    assert channel.autoVoice == False
-
-
+    assert channel.autoVoice is False
