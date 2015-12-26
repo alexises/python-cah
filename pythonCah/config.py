@@ -30,9 +30,9 @@ class Server(object):
         if channel.token == ' ':
             channel.token = self.token
         if channel.startTimeout == 0:
-            channel.startTimeout == self.startTimeout
+            channel.startTimeout = self.startTimeout
         if channel.pickTimeout == 0:
-            channel.pickTimeout == self.pickTimeout
+            channel.pickTimeout = self.pickTimeout
         if not hasattr(channel, 'autoVoice'):
             channel.autoVoice = self.autoVoice
 
