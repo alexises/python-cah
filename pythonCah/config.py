@@ -159,7 +159,7 @@ class ServerSchema(Schema):
     channels = fields.Nested(ChannelSchema, required=True, many=True)
     withSasl = fields.Boolean(missing=False)
     password = fields.Str(missing='')
-    autoVoice = fields.Boolean(required=True)
+    autoVoice = fields.Boolean()
 
 
 class ConfigSchema(Schema):
