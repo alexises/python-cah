@@ -1,4 +1,5 @@
-from pythonCah.security import AuthenticationManager
+from pythonCah.security import AuthenticationManager, AuthorizationManager
+import pytest
 
 
 def test_basicAcl():
@@ -30,3 +31,17 @@ def test_nonMatchingAcl():
     d.addAcl('ROLE_1', ircRole='~')
     assert d.getRole('irc.iiens.net', '#cahBot', 'alexises', '~') == ['ROLE_1']
     assert d.getRole('irc.iiens.net', '#cahBot', 'alexises', '') == []
+
+
+def test_basicAuthorization():
+    a = AuthenticationManager()
+    a.addAcl('ROLE_1')
+    b = AuthorizationManager(a)
+    b.add('cmd1', 'ROLE_1')
+    b.add('cmd2', 'ROLE_2')
+
+    assert b.authenticate('irc.iiens.net', '#cahBot', 'alexises', '~', 'cmd1')
+    assert not b.authenticate('irc.iiens.net', '#cahBot', 'alexises',
+                              '~', 'cmd2')
+    with pytest.raises(KeyError):
+        b.authenticate('irc.iiens.net', '#cahBot', 'alexises', '~', 'cmd3')
