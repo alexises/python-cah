@@ -1,0 +1,19 @@
+{
+  "ctcp" : "I'm a dunny bot under devel",
+  "nick" : "nono-devel",
+  "servers" : [
+    {
+      "channels" : [
+        { "channel" : "notAChannel" }
+      ]
+    }
+  ],
+  "token" : "notAToken",
+  "acl" : [
+    {},
+    { "server" : "irc.iiens.net", "channel": "notACHannel", "nick" : "#alexises", "ircRole": "notARole", "role" : "ROLE_DEBUG" }
+  ],
+  "roleMapping" : [
+    {}
+  ]
+}

@@ -1,5 +1,6 @@
 from pythonCah.config import loadConfig
 from pythonCah.security import AuthenticationManager as AM
+from marshmallow.exceptions import ValidationError
 import pytest
 
 
@@ -12,6 +13,10 @@ def test_unavailableFile():
     with pytest.raises(FileNotFoundError):
         loadConfig('jdt/notAFile.json')
 
+
+def test_errorConfig():
+    with pytest.raises(ValidationError):
+        loadConfig('jdt/configError.json')
 
 def test_minimalConfig():
     c = loadConfig('jdt/minimalConfig.json')
