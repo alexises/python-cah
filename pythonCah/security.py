@@ -77,8 +77,6 @@ class AuthorizationManager(object):
         neededRole = self.acl[command]
         logger.debug('neededRole : {}'.format(neededRole))
         logger.debug('roles : {}'.format(roles))
-        if neededRole == [] or neededRole is None:
-            return True
         matchedRole = list(set(roles).intersection(neededRole))
         if matchedRole == []:
             return False
