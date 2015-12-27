@@ -12,7 +12,7 @@
   ],
   "acl" : [
      { "role" : "ROLE_PLAYER" },
-     { "server" : "irc.iiens.net", "channel": "#cahBot", "nick" : "alexises", "role" : "ROLE_DEBUG" },
+     { "server" : "irc.iiens.net", "channel": "#cahBot", "nick" : "alexises", "ircRole": "~", "role" : "ROLE_DEBUG" },
      { "server" : "irc.iiens.net", "channel": "#cahBot", "ircRole" : "+", "role" : "ROLE_ADMIN" },
      { "server" : "irc.iiens.net", "channel": "#cahBot", "nick" : "alexises", "role" : "ROLE_INPERSONATE" },
      { "ircRole" : "&", "role" : "ROLE_DEBUG" },

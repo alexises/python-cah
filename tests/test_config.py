@@ -1,4 +1,5 @@
 from pythonCah.config import loadConfig
+from pythonCah.security import AuthenticationManager as AM
 import pytest
 
 
@@ -44,3 +45,42 @@ def test_channelDefaultValuePropagate():
     assert channel.startTimeout == 60
     assert channel.pickTimeout == 60
     assert channel.autoVoice is False
+
+
+def test_override():
+    c = loadConfig('jdt/override.json')
+    server = c.servers[0]
+    channel = server.channels[0]
+    assert c.startTimeout == 10
+    assert c.pickTimeout == 10
+    assert c.token == '$'
+    assert c.autoVoice is True
+    assert server.startTimeout == 20
+    assert server.pickTimeout == 20
+    assert server.token == '%'
+    assert server.autoVoice is False
+    assert channel.startTimeout == 30
+    assert channel.pickTimeout == 30
+    assert channel.token == ','
+    assert channel.autoVoice is True
+
+
+def test_aclMinimal():
+    c = loadConfig('jdt/minimalConfig.json')
+    assert len(c.acl) == 8
+    acl1 = c.acl[0]
+    assert acl1['role'] == 'ROLE_PLAYER'
+    assert acl1['server'] == AM.ALL_SERVER
+    assert acl1['ircRole'] == AM.NO_ROLE
+    assert acl1['channel'] == AM.ALL_CHANNEL
+    assert acl1['nick'] == AM.ALL_NICK
+
+
+def test_aclOverride():
+    c = loadConfig('jdt/minimalConfig.json')
+    acl1 = c.acl[1]
+    assert acl1['role'] == 'ROLE_DEBUG'
+    assert acl1['server'] == 'irc.iiens.net'
+    assert acl1['ircRole'] == '~'
+    assert acl1['channel'] == '#cahBot'
+    assert acl1['nick'] == 'alexises'
