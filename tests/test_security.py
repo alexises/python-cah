@@ -1,4 +1,6 @@
 from pythonCah.security import AuthenticationManager, AuthorizationManager
+from pythonCah.security import authentication_from_config
+from pythonCah.config import loadConfig
 import pytest
 
 
@@ -45,3 +47,13 @@ def test_basicAuthorization():
                               '~', 'cmd2')
     with pytest.raises(KeyError):
         b.authenticate('irc.iiens.net', '#cahBot', 'alexises', '~', 'cmd3')
+
+
+def test_configToAuthentication():
+    c = loadConfig('jdt/minimalConfig.json')
+    a = authentication_from_config(c.acl, c.roleMapping)
+
+    assert a.authenticate('irc.iiens.net', '#cahBot', 'alexises', '~', 'log')
+    assert a.authenticate('irc.iiens.net', '#cahBot', 'alexises', '~',
+                          'inpersonate')
+    assert not a.authenticate('notAServer', '#jeux', 'john', '', 'inpersonate')
