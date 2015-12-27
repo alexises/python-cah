@@ -1,0 +1,48 @@
+{
+  "ctcp" : "I'm a dunny bot under devel",
+  "nick" : "nono-devel",
+  "servers" : [
+    {
+      "server" : "irc.iiens.net",
+      "port" : 7000,
+      "startTimeout" : 20,
+      "pickTimeout" : 20,
+      "token" : "%",
+      "autoVoice" : false,
+      "channels" : [
+        { 
+          "channel" : "#cahbot2",
+          "startTimeout" : 30,
+          "pickTimeout" : 30,
+          "token" : ",",
+          "autoVoice" : true
+        }
+      ]
+    }
+  ],
+  "startTimeout" : 10,
+  "pickTimeout" : 10,
+  "token" : "$",
+  "autoVoice" : true,
+  "acl" : [
+     { "role" : "ROLE_PLAYER" },
+     { "server" : "irc.iiens.net", "channel": "#cahBot", "nick" : "alexises", "role" : "ROLE_DEBUG" },
+     { "server" : "irc.iiens.net", "channel": "#cahBot", "ircRole" : "+", "role" : "ROLE_ADMIN" },
+     { "server" : "irc.iiens.net", "channel": "#cahBot", "nick" : "alexises", "role" : "ROLE_INPERSONATE" },
+     { "ircRole" : "&", "role" : "ROLE_DEBUG" },
+     { "ircRole" : "~", "role" : "ROLE_ADMIN" },
+     { "ircRole" : "@", "role" : "ROLE_ADMIN" },
+     { "ircRole" : "&", "role" : "ROLE_ADMIN" }
+  ],
+  "roleMapping" : [
+     { "command" : "log", "role" : "ROLE_DEBUG" },
+     { "command" : "notice", "role" : "ROLE_DEBUG" },
+     { "command" : "list", "role" : "ROLE_DEBUG" },
+     { "command" : "start", "role" : "ROLE_PLAYER" },
+     { "command" : "join", "role" : "ROLE_PLAYER" },
+     { "command" : "pick", "role" : "ROLE_PLAYER" },
+     { "command" : "force-start", "role": "ROLE_ADMIN" },
+     { "command" : "stop", "role" : "ROLE_ADMIN" },
+     { "command" : "inpersonate", "role":  "ROLE_INPERSONATE"}
+  ]
+}
