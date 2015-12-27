@@ -18,6 +18,7 @@ def test_errorConfig():
     with pytest.raises(ValidationError):
         loadConfig('jdt/configError.json')
 
+
 def test_minimalConfig():
     c = loadConfig('jdt/minimalConfig.json')
     serverlist = c.serverList()

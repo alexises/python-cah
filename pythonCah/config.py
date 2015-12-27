@@ -188,6 +188,6 @@ class ConfigSchema(Schema):
 def loadConfig(filename):
     with open(filename) as fd:
         data = json.load(fd)
-    schema = ConfigSchema(many=False,strict=True)
+    schema = ConfigSchema(many=False, strict=True)
     result = schema.load(data)
     return result.data
