@@ -105,6 +105,7 @@ class Config(object):
         for i in self.servers:
             if i.port == port and i.server == server:
                 return i
+        return None
 
 
 class RoleMappingSchema(Schema):

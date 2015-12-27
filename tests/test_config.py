@@ -94,3 +94,23 @@ def test_roleMapping():
     assert roles[0]['role'] == 'ROLE_DEBUG'
     assert roles[8]['command'] == 'inpersonate'
     assert roles[8]['role'] == 'ROLE_INPERSONATE'
+
+
+class ConfigWrapper(object):
+    def __init__(self, server, port):
+        self.server = server
+        self.port = port
+
+
+def test_getConfig():
+    c = loadConfig('jdt/minimalConfig.json')
+    s1 = c[ConfigWrapper('irc.iiens.net', 7000)]
+    assert s1.server == 'irc.iiens.net'
+
+    s2 = c[ConfigWrapper('notExist', 65535)]
+    assert s2 is None
+
+    ch1 = s1['#cahbot2']
+    assert ch1.channel == '#cahbot2'
+    ch2 = s1['#notExitst']
+    assert not hasattr(ch2, 'channel')
