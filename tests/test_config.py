@@ -84,3 +84,13 @@ def test_aclOverride():
     assert acl1['ircRole'] == '~'
     assert acl1['channel'] == '#cahBot'
     assert acl1['nick'] == 'alexises'
+
+
+def test_roleMapping():
+    c = loadConfig('jdt/minimalConfig.json')
+    roles = c.roleMapping
+    assert len(roles) == 9
+    assert roles[0]['command'] == 'log'
+    assert roles[0]['role'] == 'ROLE_DEBUG'
+    assert roles[8]['command'] == 'inpersonate'
+    assert roles[8]['role'] == 'ROLE_INPERSONATE'
